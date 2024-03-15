@@ -36,57 +36,43 @@
                 <form:form action="/register" modelAttribute="newUser" method="post">
                     <div class="mb-3 row">
                         <div class="col">
-                            <form:label class="form-label" path="firstname">Firstname<span class="danger-text-emphasis">*</span></form:label>
+                            <form:label class="form-label" path="firstname">Firstname<span class="text-danger"> *</span></form:label>
                             <form:input type="text" class="form-control" path="firstname"/>
                             <form:errors path="firstname" class="errors"/>
                         </div>
                         <div class="col">
-                            <form:label class="form-label" path="lastname">Lastname<span class="danger-text-emphasis">*</span></form:label>
+                            <form:label class="form-label" path="lastname">Lastname<span class="text-danger"> *</span></form:label>
                             <form:input type="text" class="form-control" path="lastname"/>
                             <form:errors path="lastname" class="errors"/>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col">
-                            <form:label class="form-label" path="username">Username</form:label>
+                            <form:label class="form-label" path="username">Username<span class="text-danger"> *</span></form:label>
                             <form:input type="text" placeholder="username" path="username" class="form-control"/>
                             <form:errors path="username" class="errors"/>
                         </div>
                         <div class="col">
-                            <form:label class="form-label" path="email">Email</form:label>
+                            <form:label class="form-label" path="email">Email<span class="text-danger"> *</span></form:label>
                             <form:input type="email" placeholder="email" path="email" class="form-control"/>
                             <form:errors path="email" class="errors"/>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col">
-                            <form:label class="form-label" path="password">Password</form:label>
+                            <form:label class="form-label" path="password">Password<span class="text-danger"> *</span></form:label>
                             <form:input type="password" path="password" class="form-control"/>
                             <form:errors path="password" class="errors"/>
                         </div>
                         <div class="col">
-                            <form:label class="form-label" path="passwordConfirm">Confirm Password</form:label>
+                            <form:label class="form-label" path="passwordConfirm">Confirm Password<span class="text-danger"> *</span></form:label>
                             <form:input type="password" path="passwordConfirm" class="form-control"/>
                             <form:errors path="passwordConfirm" class="errors"/>
                         </div>
                     </div>
+                    
                     <div class="mb-3">
-                        <label class="form-label" >What's best describes you?</label>
-                        <form:errors path="role" class="errors"/>
-                        <c:forEach var="role" items="${roles}">
-                            <div class="form-check">
-                                <form:radiobutton class="form-check-input" name="roles" id="radioOption-${role.id}" value="${role.id}" path="role"/>
-                                <form:label class="form-check-label" for="radioOption-${role.id}" path="role">
-                                    ${role.displayName}
-                                </form:label>
-                            </div>
-                        </c:forEach>
-                        
-                        
-
-                    </div>
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-danger btn-lg" value="Create" />
+                        <input type="submit" class="btn btn-danger btn-lg" value="Create an account" />
                         <span>or <a href="/login">Login</a></span>
                     </div>
                 </form:form>

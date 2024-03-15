@@ -5,6 +5,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!--
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -16,23 +17,21 @@
                 
             </ul>
         </div>
-         <div class="dropdown border-left">
-            <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+        -->
+         <div class="dropdown border-start">
+            
+            <a href="#" class="d-flex align-items-center justify-content-center p-1 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://octodex.github.com/images/welcometocat.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                <strong>${loggedUser.firstname} ${loggedUser.lastname}</strong>
             </a>
-            <strong>User: ${loggedUser.firstname} ${loggedUser.lastname}</strong>
+           
             <ul class="dropdown-menu text-small shadow">
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="/myaccount/settings">Settings</a></li>
+                <li><a class="dropdown-item" href="/myaccount/profile">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
             </ul>
         </div>
 
-        <form class="d-flex">
-            <span class="material-symbols-outlined my-2 ">person</span>
-            <label class="px-2 my-2 ">${loggedUser.firstname} ${loggedUser.lastname}</label>
-            <a href="/logout" class="btn btn-outline-danger">Logout</a>
-      </form>
     </div>
 </nav>

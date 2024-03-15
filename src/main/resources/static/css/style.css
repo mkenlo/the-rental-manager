@@ -1,0 +1,30 @@
+body{
+    color: #858796;
+}
+
+h1,h2,h3,h4{
+    color:#4e73df;
+}
+a {
+    text-decoration: none;
+    color: #8f143f;
+}
+
+a:hover {
+    color: #bb0d4a;
+}
+.errors {
+    font-size: .875em;
+    margin-top: 0.25em;
+    color: #e60553;
+    display: block;
+}
+
+.border-left-info {
+    border-left: .25rem solid #016787 !important;
+}
+
+.radio-card:hover {
+    border: 2px solid #016787;
+    cursor: pointer;
+}
