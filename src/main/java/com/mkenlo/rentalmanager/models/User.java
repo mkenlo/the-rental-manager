@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PostUpdate;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -65,6 +66,18 @@ public class User {
 
     @Column(nullable = true)
     String companyAddress;
+
+    @OneToOne(mappedBy = "profile")
+    Landlord landlord;
+
+    @OneToOne(mappedBy = "profile")
+    PropertyManager manager;
+
+    @OneToOne(mappedBy = "profile")
+    Applicant applicant;
+
+    @OneToOne(mappedBy = "profile")
+    Tenant tenant;
 
     public User() {
         this.roles = new HashSet<>();
@@ -173,6 +186,39 @@ public class User {
 
     public void addRole(Role role) {
         this.roles.add(role);
+    }
+
+    
+    public Landlord getLandlord() {
+        return landlord;
+    }
+
+    public void setLandlord(Landlord landlord) {
+        this.landlord = landlord;
+    }
+
+    public PropertyManager getManager() {
+        return manager;
+    }
+
+    public void setManager(PropertyManager manager) {
+        this.manager = manager;
+    }
+
+    public Applicant getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(Applicant applicant) {
+        this.applicant = applicant;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     @Override
