@@ -68,4 +68,116 @@ public class Applicant {
     @OneToMany(mappedBy = "applicant")
     List<RentalApplication> rentApplications;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getProfile() {
+        return profile;
+    }
+
+    public void setProfile(User profile) {
+        this.profile = profile;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public String getCurrentAddress() {
+        return currentAddress;
+    }
+
+    public void setCurrentAddress(String currentAddress) {
+        this.currentAddress = currentAddress;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getEmployerName() {
+        return employerName;
+    }
+
+    public void setEmployerName(String employerName) {
+        this.employerName = employerName;
+    }
+
+    public String getEmployerAddress() {
+        return employerAddress;
+    }
+
+    public void setEmployerAddress(String employerAddress) {
+        this.employerAddress = employerAddress;
+    }
+
+    public String getEmployerPhoneNum() {
+        return employerPhoneNum;
+    }
+
+    public void setEmployerPhoneNum(String employerPhoneNum) {
+        this.employerPhoneNum = employerPhoneNum;
+    }
+
+    public int getAnnualSalary() {
+        return annualSalary;
+    }
+
+    public void setAnnualSalary(int annualSalary) {
+        this.annualSalary = annualSalary;
+    }
+
+    public String getVehiculeInfos() {
+        return vehiculeInfos;
+    }
+
+    public void setVehiculeInfos(String vehiculeInfos) {
+        this.vehiculeInfos = vehiculeInfos;
+    }
+
+    public List<RentalApplication> getRentApplications() {
+        return rentApplications;
+    }
+
+    public void setRentApplications(List<RentalApplication> rentApplications) {
+        this.rentApplications = rentApplications;
+    }
+
 }

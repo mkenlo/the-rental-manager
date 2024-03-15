@@ -24,4 +24,29 @@ public class Landlord {
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     Set<Property> ownedProperties;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getProfile() {
+        return profile;
+    }
+
+    public void setProfile(User profile) {
+        this.profile = profile;
+    }
+
+    public Set<Property> getOwnedProperties() {
+        return ownedProperties;
+    }
+
+    public void setOwnedProperties(Set<Property> ownedProperties) {
+        this.ownedProperties = ownedProperties;
+    }
+
 }

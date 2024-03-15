@@ -9,7 +9,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mkenlo.rentalmanager.models.Role;
 import com.mkenlo.rentalmanager.models.User;
+import com.mkenlo.rentalmanager.services.ApplicantService;
+import com.mkenlo.rentalmanager.services.LandLordService;
+import com.mkenlo.rentalmanager.services.ManagerService;
 import com.mkenlo.rentalmanager.services.RoleService;
+import com.mkenlo.rentalmanager.services.TenantService;
 import com.mkenlo.rentalmanager.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,7 +29,8 @@ public class ProfileController {
     UserService userService;
     RoleService roleService;
 
-    public ProfileController(UserService userService, RoleService roleService) {
+    public ProfileController(UserService userService, RoleService roleService, TenantService tenantService,
+            LandLordService landlordService, ManagerService managerService, ApplicantService applicantService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -60,8 +65,10 @@ public class ProfileController {
             User user = (User) model.getAttribute("loggedUser");
             user.addRole(role);
             userService.save(user);
-            redirect.addFlashAttribute("message", "yay! you are starting yor journey as a " + role.getDisplayName());
+            // create entity relationships (User and Profile Type)
+            userService.setUserProfile(role, user);
 
+            redirect.addFlashAttribute("message", "yay! you are starting yor journey as a " + role.getDisplayName());
             return "redirect:" + role.getBaseUrl();
         }
         redirect.addFlashAttribute("message", "Pick a role to continue");

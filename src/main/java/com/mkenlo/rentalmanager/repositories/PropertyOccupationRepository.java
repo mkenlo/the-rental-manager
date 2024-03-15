@@ -8,6 +8,7 @@ import com.mkenlo.rentalmanager.models.Property;
 import com.mkenlo.rentalmanager.models.PropertyOccupation;
 import com.mkenlo.rentalmanager.models.Tenant;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -17,7 +18,9 @@ public interface PropertyOccupationRepository extends CrudRepository<PropertyOcc
 
     List<PropertyOccupation> findByTenant(Tenant tenant);
 
-    @Query("select * from property_occupation p where p.move_in_date <= ?1 and p.move_out_date >= ?1;")
-    List<PropertyOccupation> findCurrentlyLeasing(String today);
+    @Query("select p from PropertyOccupation p where p.moveInDate <= ?1 and p.moveOutDate >= ?1")
+    List<PropertyOccupation> getCurrentlyLeasing(Date today);
+
+    List<PropertyOccupation> findByMoveInDateAfterAndMoveOutDateBefore(Date today1, Date today2);
 
 }

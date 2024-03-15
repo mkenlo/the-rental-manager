@@ -11,6 +11,6 @@ import com.mkenlo.rentalmanager.models.Applicant;
 public interface ApplicantRepository extends CrudRepository<Applicant, Long> {
     List<Applicant> findAll();
 
-    ApplicantRepository findById(long id);
+    Applicant findById(long id);
 
 }

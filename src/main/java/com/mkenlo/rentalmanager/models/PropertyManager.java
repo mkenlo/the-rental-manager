@@ -26,4 +26,28 @@ public class PropertyManager {
     @OneToMany(mappedBy = "propertyManager", fetch = FetchType.LAZY)
     Set<Property> managedProperties;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getProfile() {
+        return profile;
+    }
+
+    public void setProfile(User profile) {
+        this.profile = profile;
+    }
+
+    public Set<Property> getManagedProperties() {
+        return managedProperties;
+    }
+
+    public void setManagedProperties(Set<Property> managedProperties) {
+        this.managedProperties = managedProperties;
+    }
+
 }
