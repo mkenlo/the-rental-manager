@@ -2,14 +2,21 @@
     <%@ include file="header.jsp" %>
 
     <div class="container-fluid d-flex">
-
-        <%@ include file="sidebar.jsp" %>
-
-        <!-- Main start-->
+            <!-- Main start-->
         <main class="container py-4">
-            <h1>Add a property</h1>
 
-            <form:form action="/owner/add-property" method="post" modelAttribute="newProperty">
+            <div class="d-flex mb-3 justify-content-end">
+                <a href="/owner" class="nav-link text-primary" aria-current="page">
+                        <i class="fa-solid fa-house-user fa-lg"></i>
+                        Dashboard
+                </a>
+            </div>
+            
+            <div class="row">
+
+                <h1>Add a property</h1>
+                
+                <form:form action="/owner/properties/add" method="post" modelAttribute="newProperty">
                    <div class="mb-3 row">
                         <div class="col">
                             <form:label class="form-label" path="name">Name<span class="text-danger"> *</span></form:label>
@@ -60,9 +67,13 @@
                     
                     <div class="mb-3">
                         <input type="submit" class="btn btn-primary btn-lg" value="Add" />
+                        <a class="text-secondary mx-3" href="/owner">Cancel</a>
                     </div>
             
             </form:form>
+            
+            
+            </div>
 
         </main>
         <!-- Main end-->

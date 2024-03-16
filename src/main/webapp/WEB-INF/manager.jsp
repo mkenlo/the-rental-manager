@@ -3,7 +3,7 @@
 
     <div class="container-fluid d-flex">
 
-        <%@ include file="sidebar.jsp" %>
+        <%@ include file="manager-sidebar.jsp" %>
 
         <!-- Main start-->
         <main class="container py-4">

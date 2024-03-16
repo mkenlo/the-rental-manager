@@ -3,7 +3,7 @@
 
     <div class="container-fluid d-flex">
 
-        <%@ include file="sidebar.jsp" %>
+        <%@ include file="owner-sidebar.jsp" %>
 
         <!-- Main start-->
         <main class="container py-4">
@@ -18,17 +18,36 @@
             </div>
             <div>
                 <div class="col-md-4">
-                    <h1>Welcome back ${loggedUser.firstname}</h1>
+                    <h1>Welcome back ${loggedUser.firstname}!</h1>
                 </div>
+
             </div>
+            <div class="row justify-content-end">
+                <div class="card col-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Rented</h5>
+                        <p class="card-text">${properties.size()}</p>
+                    </div>
+                </div> 
+                <div class="card col-2 mx-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Applications</h5>
+                        <p class="card-text">456</p>
+                        
+                    </div>
+                </div>    
+                
+            
+            </div>
+
+
 
             <div class="row my-3 properties-list">
                 <div class="col-xl-12 grid-margin stretch-card">
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <h4 class="card-title text-purple">My Properties </h4>
-                            <a href="owner/add-property" class="btn btn-outline-primary">+ new
-                                property</a>
+                            <a href="/owner/properties/add" class="btn btn-outline-primary">+ new property</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -53,7 +72,7 @@
                                                 <td>${item.propertyType}</td>
                                                 <td>${item.surface}</td>
                                                 <td><fmt:formatNumber value = "${item.minLeasePrice}" type = "currency" maxFractionDigits="0"/>$</td>
-                                                <td>Available</td>
+                                                <td></td>
 
                                             </tr>
                                         </c:forEach>                                    

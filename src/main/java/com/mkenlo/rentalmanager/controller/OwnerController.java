@@ -25,7 +25,6 @@ import com.mkenlo.rentalmanager.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/owner")
@@ -62,19 +61,19 @@ public class OwnerController {
         Page<Property> propertiesPaginated = propertyService.getPropertiesByOwner(loggedUser.getLandlord(),
                 page);
 
-        return addPaginationModel(page, model, propertiesPaginated);
+        addPaginationModel(page, model, propertiesPaginated);
+        return "owner";
     }
 
-    private String addPaginationModel(int page, Model model, Page<Property> paginated) {
+    private void addPaginationModel(int page, Model model, Page<Property> paginated) {
         List<Property> listProperties = paginated.getContent();
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", paginated.getTotalPages());
         model.addAttribute("totalItems", paginated.getTotalElements());
         model.addAttribute("properties", listProperties);
-        return "owner";
     }
 
-    @GetMapping("/add-property")
+    @GetMapping("/properties/add")
     public String addPropertyForm(Model model, RedirectAttributes redirect) {
         User loggedUser = (User) model.getAttribute("loggedUser");
         if (loggedUser == null || !loggedUser.getRoles().contains(roleService.findByName("ROLE_LANDLORD"))) {
@@ -85,7 +84,7 @@ public class OwnerController {
         return "property-add";
     }
 
-    @PostMapping("/add-property")
+    @PostMapping("/properties/add")
     public String postAddProperty(@Valid @ModelAttribute("newProperty") Property property, BindingResult result,
             Model model) {
         if (result.hasErrors()) {
@@ -95,9 +94,8 @@ public class OwnerController {
         return "redirect:/owner";
     }
 
-    @GetMapping("/edit-property/{propertyId}")
-    public String editPropertyForm(@PathParam("propertyId") long propertyId,
-            Model model,
+    @GetMapping("/properties/{propertyId}/edit")
+    public String editPropertyForm(@PathVariable("propertyId") long propertyId, Model model,
             RedirectAttributes redirect) {
         Property property = propertyService.getById(propertyId);
         if (property == null) {
@@ -108,11 +106,9 @@ public class OwnerController {
         return "property-edit";
     }
 
-    @PutMapping("/edit-property/{propertyId}")
+    @PutMapping("/properties/{propertyId}/edit")
     public String postEditProperty(@PathVariable("propertyId") long id,
-
-            @Valid @ModelAttribute("property") Property property, BindingResult result,
-            Model model) {
+            @Valid @ModelAttribute("property") Property property, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "property-edit";
         }
@@ -121,7 +117,7 @@ public class OwnerController {
         return "redirect:/owner";
     }
 
-    @DeleteMapping("/delete/{propertyId}")
+    @DeleteMapping("/properties/delete/{propertyId}")
     public String deleteProperty(@PathVariable("propertyId") long id, Model model, RedirectAttributes redirect) {
         Property property = propertyService.getById(id);
         if (property == null) {
