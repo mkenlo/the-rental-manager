@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mkenlo.rentalmanager.models.Property;
 import com.mkenlo.rentalmanager.models.User;
 import com.mkenlo.rentalmanager.services.PropertyService;
+import com.mkenlo.rentalmanager.services.RoleService;
 import com.mkenlo.rentalmanager.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,10 +33,12 @@ public class OwnerController {
 
     UserService userService;
     PropertyService propertyService;
+    RoleService roleService;
 
-    public OwnerController(UserService userService, PropertyService propertyService) {
+    public OwnerController(UserService userService, PropertyService propertyService, RoleService roleService) {
         this.userService = userService;
         this.propertyService = propertyService;
+        this.roleService = roleService;
     }
 
     @ModelAttribute
@@ -54,9 +57,9 @@ public class OwnerController {
     }
 
     @GetMapping("")
-    public String index(@RequestParam(defaultValue = "1") int page, Model model, Principal principal) {
+    public String index(@RequestParam(defaultValue = "1") int page, Model model) {
         User loggedUser = (User) model.getAttribute("loggedUser");
-        Page<Property> propertiesPaginated = propertyService.getPropertiesByPropertyManager(loggedUser.getManager(),
+        Page<Property> propertiesPaginated = propertyService.getPropertiesByOwner(loggedUser.getLandlord(),
                 page);
 
         return addPaginationModel(page, model, propertiesPaginated);
@@ -72,7 +75,12 @@ public class OwnerController {
     }
 
     @GetMapping("/add-property")
-    public String addPropertyForm(String redirect, Model model) {
+    public String addPropertyForm(Model model, RedirectAttributes redirect) {
+        User loggedUser = (User) model.getAttribute("loggedUser");
+        if (loggedUser == null || !loggedUser.getRoles().contains(roleService.findByName("ROLE_LANDLORD"))) {
+            redirect.addFlashAttribute("error", "Action requires Login");
+            return "redirect:/login";
+        }
         model.addAttribute("newProperty", new Property());
         return "property-add";
     }

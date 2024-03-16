@@ -15,7 +15,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </div>
                 </c:if>
-
+            </div>
+            <div>
                 <div class="col-md-4">
                     <h1>Welcome back ${loggedUser.firstname}</h1>
                 </div>
@@ -26,7 +27,7 @@
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <h4 class="card-title text-purple">My Properties </h4>
-                            <a href="/properties/new?redirect=manager" class="btn btn-outline-primary">+ new
+                            <a href="owner/add-property" class="btn btn-outline-primary">+ new
                                 property</a>
                         </div>
                         <div class="card-body">
@@ -48,10 +49,10 @@
                                             <tr>
                                                 <td>${item.id}</td>
                                                 <td><a href="/properties/${item.id}">${item.name}</a></td>
-                                                <td>${item.adress}</td>
-                                                <td>${item.type}</td>
+                                                <td>${item.address}</td>
+                                                <td>${item.propertyType}</td>
                                                 <td>${item.surface}</td>
-                                                <td>${item.minLeasePrice}</td>
+                                                <td><fmt:formatNumber value = "${item.minLeasePrice}" type = "currency" maxFractionDigits="0"/>$</td>
                                                 <td>Available</td>
 
                                             </tr>
@@ -69,7 +70,7 @@
                             <ul class="pagination justify-content-center">
                                 <c:if test="${currentPage>1}">
                                     <li class="page-item">
-                                        <a class="page-link" href="/manager?page=${currentPage - 1}" tabindex="-1">Previous</a>
+                                        <a class="page-link" href="/owner?page=${currentPage - 1}" tabindex="-1">Previous</a>
                                     </li>
                                 </c:if>
                                 
@@ -77,7 +78,7 @@
 
                                 <c:if test="${currentPage<totalPages}">
                                     <li class="page-item">
-                                        <a class="page-link" href="/manager?page=${currentPage + 1}">Next</a>
+                                        <a class="page-link" href="/owner?page=${currentPage + 1}">Next</a>
                                     </li>
                                 </c:if>
                             </ul>

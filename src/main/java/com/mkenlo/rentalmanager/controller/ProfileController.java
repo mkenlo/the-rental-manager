@@ -63,7 +63,7 @@ public class ProfileController {
             // create entity relationships (User and Profile Type)
             userService.setUserProfile(role, user);
 
-            redirect.addFlashAttribute("message", "yay! you are starting yor journey as a " + role.getDisplayName());
+            redirect.addFlashAttribute("message", "Yay! you are starting your journey as a " + role.getDisplayName());
             return "redirect:" + role.getBaseUrl();
         }
         redirect.addFlashAttribute("message", "Pick a role to continue");

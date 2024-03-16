@@ -1,7 +1,9 @@
 package com.mkenlo.rentalmanager.controller;
 
 import java.security.Principal;
+import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +49,16 @@ public class PropertyController {
 
     @GetMapping("")
     public String index(@RequestParam(defaultValue = "1") int page, Model model) {
-        model.addAttribute("properties", propertyService.getAll(page));
+        Page<Property> propertiesPaginated = propertyService.getAll(page);
+        return addPaginationModel(page, model, propertiesPaginated);
+    }
+
+    private String addPaginationModel(int page, Model model, Page<Property> paginated) {
+        List<Property> listProperties = paginated.getContent();
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", paginated.getTotalPages());
+        model.addAttribute("totalItems", paginated.getTotalElements());
+        model.addAttribute("properties", listProperties);
         return "property-list";
     }
 

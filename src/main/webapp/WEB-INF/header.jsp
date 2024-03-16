@@ -39,7 +39,7 @@
                     <a href="#"
                         class="d-flex align-items-center justify-content-center p-1 link-dark text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-circle-user fa-lg"></i>
+                        <i class="fa-regular fa-circle-user fa-lg px-3"></i>
                         <strong>${loggedUser.firstname} ${loggedUser.lastname}</strong>
                     </a>
 

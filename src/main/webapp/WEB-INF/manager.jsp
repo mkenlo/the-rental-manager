@@ -47,8 +47,8 @@
                                             <tr>
                                                 <td>${item.id}</td>
                                                 <td><a href="/properties/${item.id}">${item.name}</a></td>
-                                                <td>${item.adress}</td>
-                                                <td>${item.type}</td>
+                                                <td>${item.address}</td>
+                                                <td>${item.propertyType}</td>
                                                 <td>${item.surface}</td>
                                                 <td>${item.minLeasePrice}</td>
                                                 <td>Available</td>
