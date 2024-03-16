@@ -23,7 +23,34 @@
 
 <body>
 
-    <%@ include file="navbar.jsp" %>
+   <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+            <div class="container">
+                <a class="navbar-brand" href="/"><i class="fa-solid fa-house"></i> Rental Manager</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="dropdown border-start">
+
+                    <a href="#"
+                        class="d-flex align-items-center justify-content-center p-1 link-dark text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-circle-user fa-lg"></i>
+                        <strong>${loggedUser.firstname} ${loggedUser.lastname}</strong>
+                    </a>
+
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="/myaccount/profile">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
 
     <main class="container py-4">
 

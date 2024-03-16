@@ -9,11 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mkenlo.rentalmanager.models.Role;
 import com.mkenlo.rentalmanager.models.User;
-import com.mkenlo.rentalmanager.services.ApplicantService;
-import com.mkenlo.rentalmanager.services.LandLordService;
-import com.mkenlo.rentalmanager.services.ManagerService;
 import com.mkenlo.rentalmanager.services.RoleService;
-import com.mkenlo.rentalmanager.services.TenantService;
 import com.mkenlo.rentalmanager.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,8 +25,7 @@ public class ProfileController {
     UserService userService;
     RoleService roleService;
 
-    public ProfileController(UserService userService, RoleService roleService, TenantService tenantService,
-            LandLordService landlordService, ManagerService managerService, ApplicantService applicantService) {
+    public ProfileController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -72,7 +67,7 @@ public class ProfileController {
             return "redirect:" + role.getBaseUrl();
         }
         redirect.addFlashAttribute("message", "Pick a role to continue");
-        return "redirect:/myaccount?firstAction";
+        return "redirect:/myaccount";
 
     }
 
