@@ -1,7 +1,6 @@
 package com.mkenlo.rentalmanager.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -53,6 +52,7 @@ public class OwnerController {
         }
         user = userService.findByUsername(username);
         model.addAttribute("loggedUser", user);
+        model.addAttribute("controllerPath", "owner");
     }
 
     @GetMapping("")
@@ -61,16 +61,8 @@ public class OwnerController {
         Page<Property> propertiesPaginated = propertyService.getPropertiesByOwner(loggedUser.getLandlord(),
                 page);
 
-        addPaginationModel(page, model, propertiesPaginated);
+        propertyService.addPaginationModel(page, model, propertiesPaginated);
         return "owner";
-    }
-
-    private void addPaginationModel(int page, Model model, Page<Property> paginated) {
-        List<Property> listProperties = paginated.getContent();
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", paginated.getTotalPages());
-        model.addAttribute("totalItems", paginated.getTotalElements());
-        model.addAttribute("properties", listProperties);
     }
 
     @GetMapping("/properties/add")
@@ -117,7 +109,7 @@ public class OwnerController {
         return "redirect:/owner";
     }
 
-    @DeleteMapping("/properties/delete/{propertyId}")
+    @DeleteMapping("/properties/{propertyId}/delete")
     public String deleteProperty(@PathVariable("propertyId") long id, Model model, RedirectAttributes redirect) {
         Property property = propertyService.getById(id);
         if (property == null) {
