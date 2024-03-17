@@ -16,29 +16,6 @@
                     </div>
                 </c:if>
             </div>
-            <div>
-                <div class="col-md-4">
-                    <h1>Welcome back ${loggedUser.firstname}!</h1>
-                </div>
-
-            </div>
-            <div class="row justify-content-end">
-                <div class="card col-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Rented</h5>
-                        <p class="card-text">${properties.size()}</p>
-                    </div>
-                </div> 
-                <div class="card col-2 mx-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Applications</h5>
-                        <p class="card-text">456</p>
-                        
-                    </div>
-                </div>    
-                
-            
-            </div>
 
 
 
@@ -46,8 +23,7 @@
                 <div class="col-xl-12 grid-margin stretch-card">
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
-                            <h4 class="card-title text-purple">My Properties </h4>
-                            <a href="/owner/properties/add" class="btn btn-outline-primary">+ new property</a>
+                            <h4 class="card-title text-purple">Rent Applications </h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -58,21 +34,40 @@
                                             <th scope="col"> Property Name</th>
                                             <th scope="col"> Address</th>
                                             <th scope="col"> Type</th>
-                                            <th scope="col"> Sqt ft</th>
-                                            <th scope="col"> Min lease Price</th>
+                                            <th scope="col"> Submitted on</th>
+                                            <th scope="col"> Deposit</th>
+                                            <th scope="col"> Rent</th>
+                                            <th scope="col"> Lease Length</th>
                                             <th scope="col"> Status</th>
+                                            <th scope="col"> Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="item" items="${properties}">
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td><a href="/owner/properties/applications/12345">Adriana View</a></td>
+                                            <td>123 Somewhere, City, State, 12345</td>
+                                            <td>Townhouse</td>
+                                            <td>Mar 14,2024</td>
+                                            <td>50$</td>
+                                            <td>1200$</td>
+                                            <td>12months</td>
+                                            <td> <span class="badge text-bg-warning">Pending</span></td>
+                                            <td> <button class="btn btn-outline-success btn-sm">Approve</button>  <button class="btn btn-outline-danger btn-sm">Reject</button></td>
+
+                                        </tr>
+                                        <c:forEach var="item" items="${applications}">
                                             <tr>
                                                 <th scope="row"></th>
-                                                <td><a href="/properties/${item.id}">${item.name}</a></td>
-                                                <td>${item.address}</td>
-                                                <td>${item.propertyType}</td>
-                                                <td>${item.surface}</td>
-                                                <td><fmt:formatNumber value = "${item.minLeasePrice}" type = "currency" maxFractionDigits="0"/>$</td>
-                                                <td></td>
+                                                <td><a href="/properties/applications/${item.id}">${item.property.name}</a></td>
+                                                <td>${item.property.address}</td>
+                                                <td>${item.property.propertyType}</td>
+                                                <td>${item.createdOn}</td>
+                                                <td>${item.deposit}</td>
+                                                <td>${item.rentPrice}</td>
+                                                <td>${item.leaseLength}</td>
+                                                <td>${item.status}</td>
+                                                <td> <button class="btn btn-outline-success btn-sm">Approve</button>  <button class="btn btn-outline-danger btn-sm">Reject</button></td>
 
                                             </tr>
                                         </c:forEach>                                    

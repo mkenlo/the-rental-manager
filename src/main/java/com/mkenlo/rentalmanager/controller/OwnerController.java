@@ -130,4 +130,14 @@ public class OwnerController {
 
     }
 
+    @GetMapping("/properties/applications")
+    public String getRentApplications() {
+        return "rent-application-list";
+    }
+
+    @GetMapping("/properties/applications/{applicationID}")
+    public String getRentApplicationsDetail() {
+        return "rent-application-detail";
+    }
+
 }
