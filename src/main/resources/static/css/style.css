@@ -28,3 +28,7 @@ a:hover {
     border: 2px solid #016787;
     cursor: pointer;
 }
+
+.listing:hover{
+    border: 2px solid #252627;
+}

@@ -4,7 +4,7 @@
     <main class="container py-4">
 
     <div class="d-flex mb-3 justify-content-end">
-        <a href="/manager" class="nav-link text-primary" aria-current="page">
+        <a href="${controllerPath}" class="nav-link text-primary" aria-current="page">
                 <i class="fa-solid fa-house-user fa-lg"></i>
                 Dashboard
         </a>
@@ -40,6 +40,18 @@
             
         </div>
     </c:if>
+    <c:set var="hasApplicantRole" value="false" scope="request" />
+    <c:forEach items="${loggedUser.roles}" var="role">
+        <c:if test="${role.name == 'ROLE_APPLICANT'}">
+            <c:set var="hasApplicantRole" value="true" scope="request" />
+        </c:if>
+    </c:forEach>
+    <c:if test="${hasApplicantRole}">
+        <div class="row my-4">
+            <a href="/applicant/start/application/${property.id}"  class="btn btn-lg btn-dark">Apply to this property</a>
+        </div>
+    </c:if>
+
     </main>
 </body>
 </html>
