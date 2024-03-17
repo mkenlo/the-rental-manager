@@ -33,7 +33,7 @@
                         <div class="col">
                             <form:label class="form-label" path="propertyType">Property Type<span class="text-danger"> *</span></form:label>
                             <select class="form-select" aria-label="select-property-type" name="propertyType">
-                                <option selected>Open menu</option>
+                                <option selected>Property Type</option>
                                 <option value="house">House</option>
                                 <option value="townhouse">TownHouse</option>
                                 <option value="appartment">Appartment</option>

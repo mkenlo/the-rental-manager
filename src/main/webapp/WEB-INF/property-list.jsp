@@ -50,7 +50,7 @@
                                                 <td>${item.address}</td>
                                                 <td>${item.propertyType}</td>
                                                 <td>${item.surface}</td>
-                                                <td><fmt:formatNumber value = "${item.minLeasePrice}" type = "currency" maxFractionDigits="0"/>$</td>
+                                                <td><fmt:formatNumber value = "${item.minLeasePrice}" type = "currency" maxFractionDigits="0"/></td>
                                                 <td>${item.owner.profile.firstname}</td>
 
                                             </tr>
