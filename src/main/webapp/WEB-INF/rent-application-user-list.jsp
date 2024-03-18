@@ -1,10 +1,7 @@
 
     <%@ include file="header.jsp" %>
 
-    <div class="container-fluid d-flex">
-
-        <%@ include file="owner-sidebar.jsp" %>
-
+    <div class="container">
         <!-- Main start-->
         <main class="container py-4">
 
@@ -16,7 +13,6 @@
                     </div>
                 </c:if>
             </div>
-
 
 
             <div class="row my-3 properties-list">
@@ -39,7 +35,6 @@
                                             <th scope="col"> Rent</th>
                                             <th scope="col"> Lease Length</th>
                                             <th scope="col"> Status</th>
-                                            <th scope="col"> Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,8 +47,7 @@
                                             <td>50$</td>
                                             <td>1200$</td>
                                             <td>12months</td>
-                                            <td> <span class="badge text-bg-warning">Pending</span></td>
-                                            <td> <button class="btn btn-outline-success btn-sm">Approve</button>  <button class="btn btn-outline-danger btn-sm">Reject</button></td>
+                                            <td> <span class="badge text-bg-warning">Pending</span></td>                    
 
                                         </tr>
                                         <c:forEach var="item" items="${applications}">
@@ -64,9 +58,10 @@
                                                 <td>${item.property.propertyType}</td>
                                                 <td><fmt:formatDate type="date" value="${item.createdOn}"/></td>
                                                 <td><fmt:formatNumber type="currency" value="${item.deposit}" maxFractionDigits="0"/></td>
-                                                <td><td><fmt:formatNumber value="${item.rentPrice}" type = "currency" maxFractionDigits="0"/></td></td>
+                                                <td><fmt:formatNumber value="${item.rentPrice}" type = "currency" maxFractionDigits="0"/></td>
                                                 <td>${item.leaseLength} months</td>
-                                                <td><c:choose>
+                                                <td>
+                                                    <c:choose>
                                                         <c:when test = "${item.status == 'approved'}">
                                                             <span class="badge text-bg-success">${item.status}</span>
                                                         </c:when>
@@ -80,8 +75,6 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td> <button class="btn btn-outline-success btn-sm">Approve</button>  <button class="btn btn-outline-danger btn-sm">Reject</button></td>
-
                                             </tr>
                                         </c:forEach>                                    
                                         

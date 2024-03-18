@@ -16,7 +16,7 @@ public interface RentApplicationRepository extends CrudRepository<RentalApplicat
 
     List<RentalApplication> findAll();
 
-    List<RentalApplication> findByStatus(boolean status);
+    List<RentalApplication> findByStatus(String status);
 
     List<RentalApplication> findByLeaseLength(int leaseLength);
 

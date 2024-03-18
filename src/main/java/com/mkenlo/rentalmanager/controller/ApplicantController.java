@@ -107,11 +107,21 @@ public class ApplicantController {
     public String postApplicationStep2(@PathVariable long propertyId, @RequestParam("applicant") long applicantId,
             @Valid @ModelAttribute("newApplication") RentalApplication newApplication, BindingResult result,
             Model model, RedirectAttributes redirect) {
+        Property property = propertyService.getById(propertyId);
+        Applicant applicant = applicantService.getById(applicantId);
+
+        if (property == null || applicant == null) {
+            redirect.addFlashAttribute("error", "404 - Object Non Found. Invalid Payload");
+            return "redirect:/applicant";
+        }
         if (result.hasErrors()) {
-            model.addAttribute("property", propertyService.getById(propertyId));
-            model.addAttribute("applicant", applicantService.getById(applicantId));
+            model.addAttribute("property", property);
+            model.addAttribute("applicant", applicant);
             return "rent-application-add-step-2";
         }
+        newApplication.setStatus("pending");
+        newApplication.setApplicant(applicant);
+        newApplication.setProperty(property);
         RentalApplication application = rentAppService.save(newApplication);
         model.addAttribute("application", application);
         redirect.addFlashAttribute("message", "Thank you for submitting your application");
@@ -126,8 +136,11 @@ public class ApplicantController {
     }
 
     @GetMapping("/my-applications")
-    public String listApplications() {
-        return "my-rentapplication-list";
+    public String listApplications(Model model) {
+        User loggedUser = (User) model.getAttribute("loggedUser");
+        Applicant applicant = applicantService.getByProfile(loggedUser);
+        model.addAttribute("applications", rentAppService.getByApplicant(applicant));
+        return "rent-application-user-list";
     }
 
 }

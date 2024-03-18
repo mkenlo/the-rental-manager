@@ -59,7 +59,7 @@ public class RentalApplication {
     @Lob
     String housingHistory;
 
-    boolean status;
+    String status;
 
     public RentalApplication() {
     }
@@ -149,11 +149,11 @@ public class RentalApplication {
         this.personalReferences = personalReferences;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

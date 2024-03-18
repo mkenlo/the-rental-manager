@@ -9,6 +9,11 @@
                     Dashboard
             </a>
         </div>
+        <c:if test="${message}">
+            <div class="row">
+                <div class="alert alert-success" role="alert">${message}</div>
+            </div>
+        </c:if>
 
         <div class="row">
             <h3>New Rental Application</h3>
@@ -31,7 +36,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Name: ${application.property.name}</li>
                         <li class="list-group-item">Address: ${application.property.address}</li>
-                        <li class="list-group-item">Rent starting at:<fmt:formatNumber value="${property.minLeasePrice}" type = "currency" maxFractionDigits="0"/></li>
+                        <li class="list-group-item">Rent Price <span class="badge text-bg-info"><fmt:formatNumber value="${application.property.minLeasePrice}" type = "currency" maxFractionDigits="0"/></span></li>
                     </ul> 
                 </div>
             
@@ -49,16 +54,15 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Lease Length: ${application.leaseLength}</li>
                         <li class="list-group-item">Rent Price <fmt:formatNumber value="${application.rentPrice}" type = "currency" maxFractionDigits="0"/></li>
-                        <li class="list-group-item">Move-In Date ${application.moveInDate}</li>
-                        <li class="list-group-item">
-                            Status ${application.status} 
+                        <li class="list-group-item">Move-In Date ${application.potentialMoveInDate}</li>
+                        <li class="list-group-item">Status
                             <span class="badge text-bg-info">Submitted</span>
                             <span class="badge text-bg-warning">Pending</span></li>
                     </ul> 
                 </div>
             </div>
 
-            <a href="/applicant/my-applications">See all my Applications</a>
+            <a href="/applicant/my-applications" class="fs-3 test">See all my Applications</a>
             
             
         </div>
