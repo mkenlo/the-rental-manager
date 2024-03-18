@@ -1,9 +1,11 @@
 package com.mkenlo.rentalmanager.repositories;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.mkenlo.rentalmanager.models.Applicant;
+import com.mkenlo.rentalmanager.models.Landlord;
 import com.mkenlo.rentalmanager.models.Property;
 import com.mkenlo.rentalmanager.models.RentalApplication;
 import java.util.List;
@@ -21,4 +23,7 @@ public interface RentApplicationRepository extends CrudRepository<RentalApplicat
     List<RentalApplication> findByLeaseLength(int leaseLength);
 
     RentalApplication findById(long id);
+
+    @Query("SELECT app FROM RentalApplication app JOIN Property prop ON app.property.id=prop.id where prop.owner =?1")
+    List<RentalApplication> findByPropertyOwner(Landlord owner);
 }

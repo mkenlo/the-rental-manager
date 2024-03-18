@@ -1,6 +1,7 @@
 package com.mkenlo.rentalmanager.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mkenlo.rentalmanager.models.Landlord;
 import com.mkenlo.rentalmanager.models.Property;
+import com.mkenlo.rentalmanager.models.RentalApplication;
 import com.mkenlo.rentalmanager.models.User;
 import com.mkenlo.rentalmanager.services.PropertyService;
+import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.RoleService;
 import com.mkenlo.rentalmanager.services.UserService;
 
@@ -32,11 +36,14 @@ public class OwnerController {
     UserService userService;
     PropertyService propertyService;
     RoleService roleService;
+    RentApplicationService rentAppService;
 
-    public OwnerController(UserService userService, PropertyService propertyService, RoleService roleService) {
+    public OwnerController(UserService userService, PropertyService propertyService, RoleService roleService,
+            RentApplicationService rentAppService) {
         this.userService = userService;
         this.propertyService = propertyService;
         this.roleService = roleService;
+        this.rentAppService = rentAppService;
     }
 
     @ModelAttribute
@@ -123,7 +130,11 @@ public class OwnerController {
     }
 
     @GetMapping("/properties/applications")
-    public String getRentApplications() {
+    public String getRentApplications(Model model) {
+        User loggedUser = (User) model.getAttribute("loggedUser");
+        Landlord owner = loggedUser.getLandlord();
+        List<RentalApplication> applications = rentAppService.getByPropertyOwner(owner);
+        model.addAttribute("applications", applications);
         return "rent-application-list";
     }
 
