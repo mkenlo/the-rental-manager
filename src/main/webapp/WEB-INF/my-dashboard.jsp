@@ -21,7 +21,7 @@
                 <div class="row py-3"> 
                     <h1 class="py-3">How do you want to continue?</h1>
                     <c:forEach var="role" items="${roles}">
-                        <c:if test="${role.name!='ROLE_MANAGER'}">
+                        <c:if test="${role.name!='ROLE_APPLICANT'}">
                         <div class="col-xs-6 col-md-8 mx-1 mb-3 card border-left-info radio-card">
                             <div class="card-body">                            
                                 <input name="role" class="radio" type="radio" value="${role.id}"
