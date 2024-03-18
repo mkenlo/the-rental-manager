@@ -14,17 +14,17 @@
             <h3>New Rental Application</h3>
 
             <div class="row mb-4 mt-4 border-bottom" >
-                <div class="col step-tabs p-2 active bg-primary-subtle rounded-top">
+                <div class="col step-tabs p-2 disabled">
                     <p><i class="fa-solid fa-id-card"></i> Applicant</p>
                 </div>
-                <div class="col step-tabs p-2 disabled">
+                <div class="col step-tabs p-2 active bg-primary-subtle rounded-top">
                     <p><i class="fa-solid fa-file-contract"></i> Lease Infos</p>
                 </div>
                 <div class="col step-tabs p-2 disabled">
                     <p><i class="fa-solid fa-rectangle-list"></i> Summary </p>
                 </div>
             </div>
-            <%@ include file="new-applicant-component.jsp" %>
+            <%@ include file="new-application-component.jsp" %>
             
         </div>
 

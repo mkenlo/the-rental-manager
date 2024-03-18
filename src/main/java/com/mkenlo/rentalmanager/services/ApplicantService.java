@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.mkenlo.rentalmanager.models.Applicant;
+import com.mkenlo.rentalmanager.models.User;
 import com.mkenlo.rentalmanager.repositories.ApplicantRepository;
 
 @Service
@@ -28,4 +29,7 @@ public class ApplicantService {
         return repository.save(Applicant);
     }
 
+    public Applicant getByProfile(User profile) {
+        return repository.findByProfile(profile);
+    }
 }

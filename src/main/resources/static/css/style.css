@@ -1,5 +1,5 @@
 body{
-    color: #858796;
+    color: #2d2f3c;;
 }
 
 h1,h2,h3,h4{
@@ -31,4 +31,16 @@ a:hover {
 
 .listing:hover{
     border: 2px solid #252627;
+}
+
+.step-tabs.active {
+    
+    color: #4e73df;
+    font-weight: 800;
+    border-bottom: 2px solid#016787;
+}
+
+.step-tabs.disabled {
+
+    color: #aeafb3;
 }

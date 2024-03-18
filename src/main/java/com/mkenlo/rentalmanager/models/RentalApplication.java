@@ -2,6 +2,8 @@ package com.mkenlo.rentalmanager.models;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +45,8 @@ public class RentalApplication {
     @Column(nullable = true)
     int deposit = 50;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date potentialMoveInDate;
 
     @Column(updatable = false)
