@@ -2,6 +2,7 @@ package com.mkenlo.rentalmanager.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import com.mkenlo.rentalmanager.models.Landlord;
 import com.mkenlo.rentalmanager.models.Property;
 import com.mkenlo.rentalmanager.models.RentalApplication;
 import com.mkenlo.rentalmanager.models.User;
+import com.mkenlo.rentalmanager.services.PropertyOccupationService;
 import com.mkenlo.rentalmanager.services.PropertyService;
 import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.RoleService;
@@ -36,6 +38,9 @@ public class OwnerController {
     PropertyService propertyService;
     RoleService roleService;
     RentApplicationService rentAppService;
+
+    @Autowired
+    PropertyOccupationService occupationService;
 
     public OwnerController(UserService userService, PropertyService propertyService, RoleService roleService,
             RentApplicationService rentAppService) {
@@ -70,6 +75,7 @@ public class OwnerController {
                 page);
         model.addAttribute("countApplications", rentAppService.getByPropertyOwner(owner).size());
         model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("rented", occupationService.getByLandlord(owner).size());
         propertyService.addPaginationModel(page, model, propertiesPaginated);
         return "owner";
     }
@@ -181,7 +187,7 @@ public class OwnerController {
         return "rent-application-detail";
     }
 
-    @GetMapping("/{ownerId}/applications/{applicationId}/status")
+    @GetMapping("/{ownerId}/applications/{applicationId}/edit")
     public String changeStatusRentApplication(@PathVariable("ownerId") long ownerId,
             @PathVariable("applicationId") long applicationId, @RequestParam("status") boolean status, Model model,
             HttpSession session) {
@@ -206,6 +212,11 @@ public class OwnerController {
         model.addAttribute("application", application);
         model.addAttribute("loggedUser", loggedUser);
         return String.format("redirect:/owner/%s/applications/%s", ownerId, applicationId);
+    }
+
+    @GetMapping("/rented")
+    public String getRented() {
+        return "property-rented";
     }
 
 }

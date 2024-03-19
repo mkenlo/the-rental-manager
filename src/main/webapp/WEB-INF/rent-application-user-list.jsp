@@ -35,6 +35,7 @@
                                             <th scope="col"> Rent</th>
                                             <th scope="col"> Lease Length</th>
                                             <th scope="col"> Status</th>
+                                            <th scope="col"> Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,6 +63,11 @@
                                                             <span class="badge text-bg-warning">${item.status}</span>
                                                         </c:otherwise>
                                                     </c:choose>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${item.status=="approved"}">
+                                                        <a href="#" class="btn btn-outline-success btn-sm">Sign Lease</a>  
+                                                    </c:if>
                                                 </td>
                                             </tr>
                                         </c:forEach>                                    

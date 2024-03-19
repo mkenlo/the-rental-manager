@@ -16,12 +16,11 @@
             
             <div class="row justify-content-end">
                 <div class="col-2">
-                    <a href="#">
+                    <a href="/owner/rented">
                     <div class="card card-summary">
-
                         <div class="card-body">
-                            <h5 class="card-title">Properties</h5>
-                            <p class="card-text">${properties.size()}</p>
+                            <h5 class="card-title">Rented</h5>
+                            <p class="card-text">${rented}</p>
                         </div>
                     </div>
                     </a>
@@ -70,10 +69,9 @@
                                             <th scope="col"> Type</th>
                                             <th scope="col"> Sqt ft</th>
                                             <th scope="col"> Min lease Price</th>
-                                            <th scope="col"> Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="table-striped">
                                         <c:forEach var="item" items="${properties}">
                                             <tr>
                                                 <th scope="row"></th>
@@ -82,7 +80,6 @@
                                                 <td>${item.propertyType}</td>
                                                 <td>${item.surface}</td>
                                                 <td><fmt:formatNumber value = "${item.minLeasePrice}" type = "currency" maxFractionDigits="0"/></td>
-                                                <td></td>
 
                                             </tr>
                                         </c:forEach>                                    

@@ -1,10 +1,7 @@
 
     <%@ include file="header.jsp" %>
 
-    <div class="container-fluid d-flex">
-
-        <%@ include file="manager-sidebar.jsp" %>
-
+    <div class="container">
         <!-- Main start-->
         <main class="container py-4">
 

@@ -14,6 +14,9 @@
             <c:choose>
                 <c:when test = "${application.status == 'approved'}">
                     <span class="badge text-bg-success">${application.status}</span>
+                    <c:if test="${controllerPath=="applicant"}">
+                        <a href="#" class="btn btn-outline-success btn-sm">Sign Lease</a>
+                    </c:if> 
                 </c:when>
                 
                 <c:when test = "${application.status == 'rejected'}">

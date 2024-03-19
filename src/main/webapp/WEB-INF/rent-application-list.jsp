@@ -63,8 +63,11 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td>
-                                                <td> <a href="/owner/${loggedUser.id}/applications/${item.id}/status?status=1" class="btn btn-outline-success btn-sm">Approve</a>  <a href="/owner/${loggedUser.id}/applications/${item.id}/status?status=0" class="btn btn-outline-danger btn-sm">Reject</a></td>
+                                                <td> 
+                                                    <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=1" class="btn btn-outline-success btn-sm">Approve</a>  
+                                                    <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=0" class="btn btn-outline-danger btn-sm">Reject</a>
 
+                                                </td>
                                             </tr>
                                         </c:forEach>                                    
                                         

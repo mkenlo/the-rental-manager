@@ -28,7 +28,7 @@ public class PropertyOccupation {
     @JoinColumn(name = "property_id")
     Property property;
 
-    String occupationStatus;
+    int occupationStatus = 0; // 1 => available for move in; 0 => vacant ; 2 => rented and occupied
 
     @NotNull
     long rentPrice;
@@ -69,11 +69,11 @@ public class PropertyOccupation {
         this.property = property;
     }
 
-    public String getOccupationStatus() {
+    public int getOccupationStatus() {
         return occupationStatus;
     }
 
-    public void setOccupationStatus(String occupationStatus) {
+    public void setOccupationStatus(int occupationStatus) {
         this.occupationStatus = occupationStatus;
     }
 
