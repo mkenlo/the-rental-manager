@@ -42,7 +42,7 @@
                                         <c:forEach var="item" items="${applications}">
                                             <tr>
                                                 <th scope="row"></th>
-                                                <td><a href="/owner/properties/applications/${item.id}">${item.property.name}</a></td>
+                                                <td><a href="/owner/${loggedUser.id}/applications/${item.id}">${item.property.name}</a></td>
                                                 <td>${item.property.address}</td>
                                                 <td>${item.property.propertyType}</td>
                                                 <td><fmt:formatDate type="date" value="${item.createdOn}"/></td>
@@ -64,8 +64,22 @@
                                                     </c:choose>
                                                 </td>
                                                 <td> 
-                                                    <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=1" class="btn btn-outline-success btn-sm">Approve</a>  
-                                                    <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=0" class="btn btn-outline-danger btn-sm">Reject</a>
+                                                    <c:choose>
+                                                        <c:when test = "${item.status == 'approved'}">
+                                                            <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=0" class="btn btn-outline-danger btn-sm">Reject</a>
+                                                        </c:when>
+                                                        
+                                                        <c:when test = "${item.status == 'rejected'}">
+                                                            <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=1" class="btn btn-outline-success btn-sm">Approve</a>  
+                                                    
+                                                        </c:when>
+                                                        
+                                                        <c:otherwise>
+                                                            <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=1" class="btn btn-outline-success btn-sm">Approve</a>  
+                                                            <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=0" class="btn btn-outline-danger btn-sm">Reject</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    
 
                                                 </td>
                                             </tr>

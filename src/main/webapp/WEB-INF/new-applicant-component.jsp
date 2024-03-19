@@ -43,24 +43,24 @@
         <h4>About your Job</h4>
         <div class="mb-3 row">
             <div class="col">
-                <form:label class="form-label" path="occupation">Occupation<span class="text-danger"> *</span></form:label>
+                <form:label class="form-label" path="occupation">Occupation</form:label>
                 <form:input path="occupation" class="form-control"/>
                 <form:errors path="occupation" class="errors"/>
             </div>                            
             <div class="col">
-                <form:label class="form-label" path="annualSalary">Annual Salary<span class="text-danger"> *</span></form:label>
+                <form:label class="form-label" path="annualSalary">Annual Salary</form:label>
                 <form:input type="number" path="annualSalary" class="form-control"/>
                 <form:errors path="annualSalary" class="errors"/>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <form:label class="form-label" path="employerName">Employer Name<span class="text-danger"> *</span></form:label>
+                <form:label class="form-label" path="employerName">Employer Name</form:label>
                 <form:input path="employerName" class="form-control"/>
                 <form:errors path="employerName" class="errors"/>
             </div>   
             <div class="col">
-                <form:label class="form-label" path="employerAddress">Employer Address<span class="text-danger"> *</span></form:label>
+                <form:label class="form-label" path="employerAddress">Employer Address</form:label>
                 <form:input path="employerAddress" class="form-control"/>
                 <form:errors path="employerAddress" class="errors"/>
             </div> 
