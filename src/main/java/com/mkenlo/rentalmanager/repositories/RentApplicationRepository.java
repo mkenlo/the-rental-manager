@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.mkenlo.rentalmanager.models.Applicant;
 import com.mkenlo.rentalmanager.models.Landlord;
 import com.mkenlo.rentalmanager.models.Property;
+import com.mkenlo.rentalmanager.models.PropertyManager;
 import com.mkenlo.rentalmanager.models.RentalApplication;
 import java.util.List;
 
@@ -26,4 +27,7 @@ public interface RentApplicationRepository extends CrudRepository<RentalApplicat
 
     @Query("SELECT app FROM RentalApplication app JOIN Property prop ON app.property.id=prop.id where prop.owner =?1")
     List<RentalApplication> findByPropertyOwner(Landlord owner);
+
+    @Query("SELECT app FROM RentalApplication app JOIN Property prop ON app.property.id=prop.id where prop.propertyManager =?1")
+    List<RentalApplication> findByManager(PropertyManager manager);
 }

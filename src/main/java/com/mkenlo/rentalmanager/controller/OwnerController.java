@@ -65,7 +65,7 @@ public class OwnerController {
             return "redirect:/login";
         }
         User loggedUser = userService.findByUsername(username);
-        if (!loggedUser.getRoles().get(0).getName().equalsIgnoreCase("role_landlord")) {
+        if (!loggedUser.hasRole("role_landlord")) {
             redirect.addFlashAttribute("error", "user not authorized");
             return "redirect:/login";
         }

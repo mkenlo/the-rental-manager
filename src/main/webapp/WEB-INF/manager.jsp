@@ -14,6 +14,44 @@
                 </c:if>
             </div>
 
+              <div class="row justify-content-end">
+                <div class="col-2">
+                    <a href="/owner/rented">
+                    <div class="card card-summary">
+                        <div class="card-body">
+                            <h5 class="card-title">Rented</h5>
+                            <p class="card-text">${rented}</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-2 mx-3">
+                    <a href="/owner/${loggedUser.id}/applications">
+                        <div class="card card-summary">
+                            <div class="card-body">
+                                <h5 class="card-title">Applications</h5>
+                                <p class="card-text">${countApplications}</p>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>   
+                <div class="col-2 mx-3">
+                    <a href="#">
+                    <div class="card card-summary">
+                        <div class="card-body">
+                            <h5 class="card-title">Tenants</h5>
+                            <p class="card-text">0</p>
+                            
+                        </div>
+                    </div>  
+                    </a>
+                </div>  
+                
+            
+            </div>
+
+
             <div class="row my-3 properties-list">
                 <div class="col-xl-12 grid-margin stretch-card">
                     <div class="card mb-3">
@@ -32,7 +70,6 @@
                                             <th scope="col"> Type</th>
                                             <th scope="col"> Sqt ft</th>
                                             <th scope="col"> Min lease Price</th>
-                                            <th scope="col"> Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,8 +81,6 @@
                                                 <td>${item.propertyType}</td>
                                                 <td>${item.surface}</td>
                                                 <td>${item.minLeasePrice}</td>
-                                                <td>Available</td>
-
                                             </tr>
                                         </c:forEach>                                    
                                         
