@@ -42,10 +42,15 @@
             </nav>
     </header>
     <main class="container py-4">
+
         <div class="row">
             <c:if test='${error}'>
                 <div class="alert alert-danger" role="alert">${error}</div>
             </c:if>
+        
+        </div>
+        <div class="row">
+            
             <div class="col-md-6">
                 <h1>Login</h1>
                 <form:form action="/login" modelAttribute="newLogin" method="post">

@@ -62,14 +62,15 @@ public class LoginController {
             model.addAttribute("roles", roleService.getByRoleType("user"));
             return "register";
         }
-
-        session.setAttribute("username", user.getUsername());
         Role role = user.getRoles().get(0);
+        userService.setUserProfile(role, user);
+        session.setAttribute("username", user.getUsername());
+
         return "redirect:" + role.getBaseUrl();
     }
 
     @PostMapping("/login")
-    public String doLogin(@Valid @ModelAttribute("loginUser") LoginUser loginUser, BindingResult result, Model model,
+    public String doLogin(@Valid @ModelAttribute("newLogin") LoginUser loginUser, BindingResult result, Model model,
             HttpSession session) {
         User user = userService.doLogin(loginUser, result);
         if (result.hasErrors()) {

@@ -26,7 +26,7 @@
                     
                         <div class="card-footer d-flex justify-content-between">
                             <a href="#" class="btn btn-primary">Edit my Profile</a>
-                            <a href="${loggedUser.roles.iterator().next().baseUrl}" class="btn btn-danger">Go to my Dashboard</a>
+                            <a href="${loggedUser.roles.iterator().next().baseUrl}" class="btn btn-dark">Go to my Dashboard</a>
                         </div>
                     </div>
                 </div>

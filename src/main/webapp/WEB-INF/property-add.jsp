@@ -31,9 +31,8 @@
                     </div>
                     <div class="mb-3 row">
                         <div class="col">
-                            <form:label class="form-label" path="propertyType">Property Type<span class="text-danger"> *</span></form:label>
+                            <form:label class="form-label" path="propertyType">Property Type</form:label>
                             <select class="form-select" aria-label="select-property-type" name="propertyType">
-                                <option selected>Property Type</option>
                                 <option value="house">House</option>
                                 <option value="townhouse">TownHouse</option>
                                 <option value="appartment">Appartment</option>
@@ -42,7 +41,7 @@
                             <form:errors path="propertyType" class="errors"/>
                         </div>
                         <div class="col">
-                            <form:label class="form-label" path="surface">Sqt Ft<span class="text-danger"> *</span></form:label>
+                            <form:label class="form-label" path="surface">Sqt Ft</form:label>
                             <form:input type="number" placeholder="2540" path="surface" class="form-control"/>
                             <form:errors path="surface" class="errors"/>
                         </div>
@@ -54,7 +53,7 @@
                     </div>
                     <div class="mb-3 row">
                         <div>
-                            <form:label class="form-label" path="description">Description<span class="text-danger"> *</span></form:label>
+                            <form:label class="form-label" path="description">Description</form:label>
                             <form:textarea path="description" class="form-control" style="height:150px"/>
                             <form:errors path="description" class="errors"/>
                         </div>
@@ -64,9 +63,21 @@
                         </div>
                         
                     </div>
+                    <div class="mb-3 row">
+                        <div class="col">
+                            <form:label class="form-label" path="numBed">Number of Bed</form:label>
+                            <form:input class="form-control" path="numBed"/>
+                            <form:errors path="numBed" class="errors"/>
+                        </div>
+                        <div class="col">
+                            <form:label class="form-label" path="numBath">Number of Bath</form:label>
+                            <form:input class="form-control" path="numBath"/>
+                            <form:errors path="numBath" class="errors"/>
+                        </div>
+                    </div>
                     
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-primary btn-lg" value="Add" />
+                        <input type="submit" class="btn btn-dark" value="Add" />
                         <a class="text-secondary mx-3" href="/owner">Cancel</a>
                     </div>
             

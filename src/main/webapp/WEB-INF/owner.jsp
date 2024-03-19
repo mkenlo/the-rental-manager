@@ -1,10 +1,7 @@
 
     <%@ include file="header.jsp" %>
 
-    <div class="container-fluid d-flex">
-
-        <%@ include file="owner-sidebar.jsp" %>
-
+    <div class="container">
         <!-- Main start-->
         <main class="container py-4">
 
@@ -16,31 +13,44 @@
                     </div>
                 </c:if>
             </div>
-            <div>
-                <div class="col-md-4">
-                    <h1>Welcome back ${loggedUser.firstname}!</h1>
-                </div>
-
-            </div>
+            
             <div class="row justify-content-end">
-                <div class="card col-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Rented</h5>
-                        <p class="card-text">${properties.size()}</p>
+                <div class="col-2">
+                    <a href="#">
+                    <div class="card card-summary">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Properties</h5>
+                            <p class="card-text">${properties.size()}</p>
+                        </div>
                     </div>
-                </div> 
-                <div class="card col-2 mx-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Applications</h5>
-                        <p class="card-text">456</p>
-                        
-                    </div>
-                </div>    
+                    </a>
+                </div>
+                <div class="col-2 mx-3">
+                    <a href="/owner/${loggedUser.id}/applications">
+                        <div class="card card-summary">
+                            <div class="card-body">
+                                <h5 class="card-title">Applications</h5>
+                                <p class="card-text">${countApplications}</p>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>   
+                <div class="col-2 mx-3">
+                    <a href="#">
+                    <div class="card card-summary">
+                        <div class="card-body">
+                            <h5 class="card-title">Tenants</h5>
+                            <p class="card-text">0</p>
+                            
+                        </div>
+                    </div>  
+                    </a>
+                </div>  
                 
             
             </div>
-
-
 
             <div class="row my-3 properties-list">
                 <div class="col-xl-12 grid-margin stretch-card">

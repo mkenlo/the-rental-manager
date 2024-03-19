@@ -25,7 +25,7 @@
                 <div class="col step-tabs p-2 disabled">
                     <p><i class="fa-solid fa-file-contract"></i> Lease Infos</p>
                 </div>
-                <div class="col step-tabs p-2 active bg-primary-subtle rounded-top">
+                <div class="col step-tabs p-2 active bg-purple-subtle rounded-top">
                     <p><i class="fa-solid fa-rectangle-list"></i> Summary </p>
                 </div>
             </div>

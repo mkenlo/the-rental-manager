@@ -1,7 +1,5 @@
 package com.mkenlo.rentalmanager.controller;
 
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -45,38 +43,50 @@ public class ApplicantController {
     RentApplicationService rentAppService;
 
     @ModelAttribute
-    public void addAttributes(Model model, Principal principal, HttpSession session) {
-        User user;
-        String username;
-        if (principal != null) {
-            username = principal.getName();
-        } else if (session.getAttribute("username") != null) {
-            username = (String) session.getAttribute("username");
-        } else {
-            username = "nogivenusername";
-        }
-        user = userService.findByUsername(username);
-        model.addAttribute("loggedUser", user);
+    public void addAttributes(Model model) {
+        // @TODO add Spring Security and save user info in model here
         model.addAttribute("controllerPath", "applicant");
-
     }
 
     @GetMapping("")
-    public String index(@RequestParam(defaultValue = "1") int page, Model model) {
+    public String index(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session,
+            RedirectAttributes redirect) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            redirect.addFlashAttribute("error", "action requires login");
+            return "redirect:/login";
+        }
+        User loggedUser = userService.findByUsername(username);
+        if (!loggedUser.getRoles().get(0).getName().equalsIgnoreCase("role_applicant")) {
+            redirect.addFlashAttribute("error", "user not authorized");
+            return "redirect:/login";
+        }
         Page<Property> propertiesPaginated = propertyService.getAll(page);
         propertyService.addPaginationModel(page, model, propertiesPaginated);
+        model.addAttribute("loggedUser", loggedUser);
         return "applicant";
     }
 
     @GetMapping("/start/application/{propertyId}")
-    public String startApplicationStep1(@PathVariable("propertyId") long propertyId, Model model) {
-        User loggedUser = (User) model.getAttribute("loggedUser");
+    public String startApplicationStep1(@PathVariable("propertyId") long propertyId, Model model, HttpSession session,
+            RedirectAttributes redirect) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            redirect.addFlashAttribute("error", "action requires login");
+            return "redirect:/login";
+        }
+        User loggedUser = userService.findByUsername(username);
+        if (!loggedUser.getRoles().get(0).getName().equalsIgnoreCase("role_applicant")) {
+            redirect.addFlashAttribute("error", "user not authorized");
+            return "redirect:/login";
+        }
         Applicant applicant = applicantService.getByProfile(loggedUser);
+        model.addAttribute("newApplicant", applicant);
         if (applicant == null) {
             model.addAttribute("newApplicant", new Applicant());
         }
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("property", propertyService.getById(propertyId));
-        model.addAttribute("newApplicant", applicant);
         model.addAttribute("step", 1);
         return "rent-application-add";
     }
@@ -136,9 +146,16 @@ public class ApplicantController {
     }
 
     @GetMapping("/my-applications")
-    public String listApplications(Model model) {
-        User loggedUser = (User) model.getAttribute("loggedUser");
+    public String listApplications(Model model, HttpSession session,
+            RedirectAttributes redirect) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            redirect.addFlashAttribute("error", "action requires login");
+            return "redirect:/login";
+        }
+        User loggedUser = userService.findByUsername(username);
         Applicant applicant = applicantService.getByProfile(loggedUser);
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("applications", rentAppService.getByApplicant(applicant));
         return "rent-application-user-list";
     }

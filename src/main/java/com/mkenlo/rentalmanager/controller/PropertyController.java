@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mkenlo.rentalmanager.models.Property;
+import com.mkenlo.rentalmanager.models.RentalApplication;
 import com.mkenlo.rentalmanager.models.User;
 import com.mkenlo.rentalmanager.services.PropertyService;
+import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,10 +27,12 @@ public class PropertyController {
 
     UserService userService;
     PropertyService propertyService;
+    RentApplicationService rentAppService;
 
-    public PropertyController(UserService userService, PropertyService propertyService) {
+    public PropertyController(UserService userService, PropertyService propertyService, RentApplicationService rentAppService) {
         this.userService = userService;
         this.propertyService = propertyService;
+        this.rentAppService = rentAppService;
     }
 
     @ModelAttribute
@@ -64,6 +68,24 @@ public class PropertyController {
         model.addAttribute("property", property);
 
         return "property-detail";
+    }
+
+    @GetMapping("/applications/{applicationId}")
+    public String getApplicationDetail(@PathVariable("applicationId") long applicationId,Model model, HttpSession session) {
+
+        String username = (String) session.getAttribute("username");
+
+        if (username == null) {
+            return "redirect:/login";
+        }
+        User loggedUser = userService.findByUsername(username);
+        RentalApplication application = rentAppService.getById(applicationId);
+        if (application == null) {
+            return "404";
+        }
+        model.addAttribute("application", application);
+        model.addAttribute("loggedUser", loggedUser);
+        return "rent-application-detail";
     }
 
 }

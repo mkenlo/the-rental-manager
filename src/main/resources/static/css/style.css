@@ -45,3 +45,12 @@ a:hover {
 .step-tabs.disabled {
     color: #aeafb3;
 }
+.card-summary:hover{
+    border: 2px solid#ad0fd4;
+    background-color: #f2e7f5;
+    color:#592366;
+}
+
+.bg-purple-subtle{
+    background-color: #f2e7f5;
+}

@@ -15,10 +15,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                     </div>
                 </c:if>
-
-                <div class="col-md-4">
-                    <h1>Welcome back ${loggedUser.firstname}</h1>
-                </div>
             </div>
 
             <div class="row my-3 properties-list">

@@ -20,6 +20,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Property {
@@ -32,6 +33,7 @@ public class Property {
     String name;
 
     @Column(nullable = true)
+    @Size(max = 300)
     String description;
 
     @NotBlank
@@ -41,10 +43,10 @@ public class Property {
     String propertyType;
 
     @NotNull
-    int surface;
+    int surface = 100;
 
     @Column(nullable = true)
-    int numBed;
+    int numBed = 1;
 
     @Column(nullable = true)
     float numBath = 1;
@@ -56,7 +58,7 @@ public class Property {
     String floorplan;
 
     @NotNull
-    int minLeasePrice;
+    int minLeasePrice = 500;
 
     @NotNull
     int minLeaseLength;
