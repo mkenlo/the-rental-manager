@@ -14,9 +14,7 @@
                     </div>
                 </c:if>
             </div>
-
-
-
+            
             <div class="row my-3 properties-list">
                 <div class="col-xl-12 grid-margin stretch-card">
                     <div class="card mb-3">
@@ -41,19 +39,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td><a href="/owner/properties/applications/12345">Adriana View</a></td>
-                                            <td>123 Somewhere, City, State, 12345</td>
-                                            <td>Townhouse</td>
-                                            <td>Mar 14,2024</td>
-                                            <td>50$</td>
-                                            <td>1200$</td>
-                                            <td>12months</td>
-                                            <td> <span class="badge text-bg-warning">Pending</span></td>
-                                            <td> <a href="/owner/${loggedUser.id}/applications/100/status?status=1" class="btn btn-outline-success btn-sm">Approve</a>  <a href="/owner/${loggedUser.id}/applications/100/status?status=0" class="btn btn-outline-danger btn-sm">Reject</a></td>
-
-                                        </tr>
                                         <c:forEach var="item" items="${applications}">
                                             <tr>
                                                 <th scope="row"></th>

@@ -38,18 +38,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td><a href="/owner/properties/applications/12345">Adriana View</a></td>
-                                            <td>123 Somewhere, City, State, 12345</td>
-                                            <td>Townhouse</td>
-                                            <td>Mar 14,2024</td>
-                                            <td>50$</td>
-                                            <td>1200$</td>
-                                            <td>12months</td>
-                                            <td> <span class="badge text-bg-warning">Pending</span></td>                    
-
-                                        </tr>
                                         <c:forEach var="item" items="${applications}">
                                             <tr>
                                                 <th scope="row"></th>

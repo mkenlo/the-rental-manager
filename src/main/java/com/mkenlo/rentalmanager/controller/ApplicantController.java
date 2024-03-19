@@ -57,7 +57,7 @@ public class ApplicantController {
             return "redirect:/login";
         }
         User loggedUser = userService.findByUsername(username);
-        if (!loggedUser.getRoles().get(0).getName().equalsIgnoreCase("role_applicant")) {
+        if (!loggedUser.hasRole("role_applicant")) {
             redirect.addFlashAttribute("error", "user not authorized");
             return "redirect:/login";
         }

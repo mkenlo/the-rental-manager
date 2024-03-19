@@ -2,7 +2,10 @@
 
     <main class="container p-4">
 
-        <h1 class="my-4">Discover your new rental home</h1>
+        <div class="d-flex justify-content-between my-4">
+            <h1>Discover your new rental home</h1>
+            <a href="/applicant/my-applications" class="btn btn-outline-dark btn-sm">My applications</a>
+        </div>
 
         <div class="row my-4">
 
