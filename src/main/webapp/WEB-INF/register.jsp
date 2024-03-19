@@ -70,6 +70,21 @@
                             <form:errors path="passwordConfirm" class="errors"/>
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <form:label path="roles" class="form-label">How do you describe yourself?</form:label>
+                        <c:forEach var="role" items="${roles}">
+                        <c:if test="${role.name!='ROLE_RESIDENT'}">
+                        <div class="col-xs-6 col-md-8 mx-1 mb-3 card border-left-info radio-card">
+                            <div class="card-body">                            
+                                <input name="roles" class="radio" type="radio" value="${role.id}"
+                                <c:if test="${role.name=='ROLE_LANDLORD'}">checked</c:if>
+                                > I'm a ${role.displayName}                            
+                            </div>
+                        </div>  
+                        </c:if>   
+                    </c:forEach>
+
+                    </div>
                     
                     <div class="mb-3">
                         <input type="submit" class="btn btn-danger btn-lg" value="Create an account" />

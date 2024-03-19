@@ -1,8 +1,8 @@
 package com.mkenlo.rentalmanager.models;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -60,7 +60,7 @@ public class User {
     @NotNull(message = "Please pick a role")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    Set<Role> roles;
+    List<Role> roles;
 
     @Column(nullable = true)
     String companyName;
@@ -81,7 +81,7 @@ public class User {
     Tenant tenant;
 
     public User() {
-        this.roles = new HashSet<>();
+        this.roles = new ArrayList<>();
     }
 
     @PostUpdate
@@ -177,14 +177,6 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
     public void addRole(Role role) {
         this.roles.add(role);
     }
@@ -225,6 +217,14 @@ public class User {
     public String toString() {
         return "User [id=" + id + ", firstname=" + firstname + ", username=" + username + ", email=" + email
                 + ", password=" + password + ", roles=" + roles + "]";
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
 }

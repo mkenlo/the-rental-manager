@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mkenlo.rentalmanager.models.LoginUser;
+import com.mkenlo.rentalmanager.models.Role;
 import com.mkenlo.rentalmanager.models.User;
 import com.mkenlo.rentalmanager.services.RoleService;
 import com.mkenlo.rentalmanager.services.UserService;
@@ -47,7 +48,7 @@ public class LoginController {
 
     @GetMapping("/register")
     public String getRegistration(Model model) {
-
+        model.addAttribute("roles", roleService.getByRoleType("user"));
         model.addAttribute("newUser", new User());
         model.addAttribute("roles", roleService.getByRoleType("user"));
         return "register";
@@ -63,7 +64,8 @@ public class LoginController {
         }
 
         session.setAttribute("username", user.getUsername());
-        return "redirect:/myaccount";
+        Role role = user.getRoles().get(0);
+        return "redirect:" + role.getBaseUrl();
     }
 
     @PostMapping("/login")
@@ -74,6 +76,6 @@ public class LoginController {
             return "login";
         }
         session.setAttribute("username", user.getUsername());
-        return "redirect:/myaccount";
+        return "redirect:" + user.getRoles().get(0).getBaseUrl();
     }
 }
