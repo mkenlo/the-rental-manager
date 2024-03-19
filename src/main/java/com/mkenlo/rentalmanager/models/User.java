@@ -40,6 +40,7 @@ public class User {
     String username;
 
     @Email
+    @NotBlank
     String email;
 
     @NotBlank
@@ -188,7 +189,6 @@ public class User {
         this.roles.add(role);
     }
 
-    
     public Landlord getLandlord() {
         return landlord;
     }
