@@ -16,18 +16,32 @@
     <link rel="manifest" href="/images/favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="/">Rental Manager</a>
-        </div>
-    </nav>
+     <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" >
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="/">   <img src="/images/favicon/favicon-32x32.png" width="36" /> Rental Manager </a>
+                <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                    
+                    <div class="ms-auto">
+                        <ul class="navbar-nav">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            
+                        </ul> 
+                    </div>   
+                </div>
+            </div>
+            </nav>
+    </header>
 
     <main class="container py-4">
         <div class="row">
@@ -87,7 +101,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-danger btn-lg" value="Create an account" />
+                        <input type="submit" class="btn btn-dark" value="Create an account" />
                         <span>or <a href="/login">Login</a></span>
                     </div>
                 </form:form>

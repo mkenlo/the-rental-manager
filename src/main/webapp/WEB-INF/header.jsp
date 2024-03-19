@@ -18,40 +18,34 @@
     <link rel="manifest" href="images/favicon/site.webmanifest">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://kit.fontawesome.com/d20aaabaac.js" crossorigin="anonymous"></script>
     <link href="/css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" >
             <div class="container">
-                <a class="navbar-brand" href="/"><i class="fa-solid fa-house"></i> Rental Manager</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false" >
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="dropdown border-start">
-
-                    <a href="#"
-                        class="d-flex align-items-center justify-content-center p-1 link-dark text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-circle-user fa-lg px-3"></i>
-                        <strong>${loggedUser.firstname} ${loggedUser.lastname}</strong>
-                    </a>
-
-                    <ul class="dropdown-menu text-small shadow">
-                        <li><a class="dropdown-item" href="/myaccount/profile">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
+                <a class="navbar-brand" href="/">   <img src="/images/favicon/favicon-32x32.png" width="36" /> Rental Manager </a>
+                <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="${loggedUser.roles.iterator().next().baseUrl}">Dashboard</a>
                         </li>
-                        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
                     </ul>
+                    <div class="d-flex align-items-center ms-auto border-start">
+                        <a href="/myaccount" class="d-flex align-items-center justify-content-center p-1 text-decoration-none" >
+                            <i class="fa-regular fa-circle-user fa-lg px-3"></i>
+                            <strong>${loggedUser.firstname} ${loggedUser.lastname}</strong>
+                        </a>
+                        
+                        <a href="/logout" class="text-decoration-none btn btn-dark mx-2 px-3 pt-1"><i class="fa-solid fa-right-from-bracket fa-xl"></i></a>
+                        
+                    </div>   
                 </div>
-
             </div>
-        </nav>
+            </nav>
     </header>

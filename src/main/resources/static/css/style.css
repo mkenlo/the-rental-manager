@@ -1,17 +1,18 @@
 body{
-    color: #2d2f3c;;
+    color: #2d2f3c;
 }
 
 h1,h2,h3,h4{
-    color:#4e73df;
+    color:#ad0fd4;
+;
 }
 a {
     text-decoration: none;
-    color: #DE3163;
+    color: #ad0fd4;
 }
 
 a:hover {
-    color: #bb0d4a;
+    color: #bc11e7;
 }
 .errors {
     font-size: .875em;
@@ -21,26 +22,26 @@ a:hover {
 }
 
 .border-left-info {
-    border-left: .25rem solid #016787 !important;
+    border-left: .25rem solid #ad0fd4 !important;
 }
 
 .radio-card:hover {
-    border: 2px solid #016787;
+    border: 2px solid #ad0fd4;
     cursor: pointer;
 }
 
 .listing:hover{
-    border: 2px solid #252627;
+    border: 1px solid #592366;
 }
 
-.step-tabs.active {
-    
-    color: #4e73df;
+.step-tabs.active {    
+    color: #ad0fd4;
+;
     font-weight: 800;
-    border-bottom: 2px solid#016787;
+    border-bottom: 2px solid#ad0fd4;
+;
 }
 
 .step-tabs.disabled {
-
     color: #aeafb3;
 }

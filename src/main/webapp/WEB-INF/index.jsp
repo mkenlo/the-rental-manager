@@ -15,26 +15,30 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="/">Rental Manager</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Create an account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" >
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="/">   <img src="/images/favicon/favicon-32x32.png" width="36" /> Rental Manager </a>
+                <div class="collapse navbar-collapse" id="navbarButtonsExample">
                     
-                </ul>
+                    <div class="ms-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Create an account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            
+                        </ul> 
+                    </div>   
+                </div>
             </div>
-        </div>
-    </nav>
+            </nav>
+    </header>
 
     <main class="container py-4">
         <div class="p-5 mb-4 bg-light rounded-3">
@@ -43,14 +47,10 @@
                 <p class="col-md-8 fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat earum, ducimus
                     non porro repellendus cupiditate facere labore aperiam nulla saepe nostrum dolores quia illo
                     assumenda tempora velit, aut a distinctio.</p>
-                <a href="/login" class="btn btn-primary btn-lg" type="button">Get Started</a>
+                <a href="/login" class="btn btn-dark btn-lg" type="button">Get Started</a>
             </div>
         </div>
     </main>
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

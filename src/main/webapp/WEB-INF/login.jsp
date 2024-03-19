@@ -20,12 +20,27 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
-        <div class="container">
-            <a class="navbar-brand" href="#">Rental Manager</a>
-        </div>
-    </nav>
-
+     <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" >
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="/">   <img src="/images/favicon/favicon-32x32.png" width="36" /> Rental Manager </a>
+                <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                    
+                    <div class="ms-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Create an account</a>
+                            </li>
+                            
+                        </ul> 
+                    </div>   
+                </div>
+            </div>
+            </nav>
+    </header>
     <main class="container py-4">
         <div class="row">
             <c:if test='${error}'>
@@ -43,11 +58,10 @@
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <form:input type="password" path="password" class="form-control"/>
-                        <form:errors path="password" class="errors"/>               
-
+                        <form:errors path="password" class="errors"/>  
                     </div>
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-danger" value="Submit" />
+                        <input type="submit" class="btn btn-dark" value="Submit" />
                         <span>or <a href="/register">Create an account</a></span>
                     </div>
                 </form:form>
