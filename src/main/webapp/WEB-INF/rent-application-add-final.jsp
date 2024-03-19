@@ -30,7 +30,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Name: ${application.property.name}</li>
                         <li class="list-group-item">Address: ${application.property.address}</li>
-                        <li class="list-group-item">Rent Price <span class="badge text-bg-info"><fmt:formatNumber value="${application.property.minLeasePrice}" type = "currency" maxFractionDigits="0"/></span></li>
+                        <li class="list-group-item">Rent Price: <span class="badge text-bg-info"><fmt:formatNumber value="${application.property.minLeasePrice}" type = "currency" maxFractionDigits="0"/></span></li>
                     </ul> 
                 </div>
             
@@ -47,9 +47,9 @@
                     <h3 class="my-3">Lease Details</h3>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Lease Length: ${application.leaseLength}</li>
-                        <li class="list-group-item">Rent Price <fmt:formatNumber value="${application.rentPrice}" type = "currency" maxFractionDigits="0"/></li>
-                        <li class="list-group-item">Move-In Date ${application.potentialMoveInDate}</li>
-                        <li class="list-group-item">Status
+                        <li class="list-group-item">Rent Price: <fmt:formatNumber value="${application.rentPrice}" type = "currency" maxFractionDigits="0"/></li>
+                        <li class="list-group-item">Move-In Date: ${application.potentialMoveInDate}</li>
+                        <li class="list-group-item">Status:
                             <span class="badge text-bg-info">Submitted</span>
                             <span class="badge text-bg-warning">Pending</span></li>
                     </ul> 

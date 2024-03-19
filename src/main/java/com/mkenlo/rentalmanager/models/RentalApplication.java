@@ -47,6 +47,7 @@ public class RentalApplication {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "please select a move in date")
     Date potentialMoveInDate;
 
     @Column(updatable = false)

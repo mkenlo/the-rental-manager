@@ -31,20 +31,21 @@ public class Applicant {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User profile;
 
+    @NotBlank
     String firstname;
 
     @NotBlank
     String lastname;
 
-    @NotNull
+    @NotNull(message = " please provide a date of birth")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date dob;
 
-    @NotNull
+    @NotBlank
     String ssn;
 
-    @NotNull
+    @NotBlank
     String currentAddress;
 
     @NotNull
