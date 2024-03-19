@@ -15,6 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PostUpdate;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
@@ -53,6 +54,10 @@ public class User {
 
     @Column(nullable = true)
     String phoneNum;
+
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    Date createdOn;
 
     @Temporal(TemporalType.TIMESTAMP)
     Date lastUpdateOn;
@@ -225,6 +230,26 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @PrePersist
+    private void onCreate() {
+        this.createdOn = new Date();
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public boolean hasRole(String roleName){
+        for (Role role : roles) {
+            if(role.getName().equalsIgnoreCase(roleName)) return true;
+        }
+        return false;
     }
 
 }

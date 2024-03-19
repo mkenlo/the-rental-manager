@@ -1,35 +1,67 @@
    <%@ include file="header.jsp" %>
     <main class="container py-4">
 
-        <div class="row">
-            <div class="alert alert-success alert-dismissible fade show col-md-4" role="alert">
-                <p>Welcome back <strong>${loggedUser.firstname} </strong>!!!</p>        
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            </div>
-            <c:if test="${message!=null}">
-                <div class="alert alert-primary alert-dismissible fade show col-md-4" role="alert">
-                    <p>${message}</p>        
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                </div>            
-            </c:if>
-        </div>     
-
         <div class="row my-3">
-            <div class="col-md-6">
+            <h1 class="mt-4">Account Details</h1>
+            <div class="col-xl-12">
+                <form:form action="/myaccount/edit" modelAttribute="editUser" method="put">
                 <div class="card">
-
-                    <div class="card-header"><h2>About me</h2></div>
-                    <div class="card-body">
-                        <p>Hi I'm <strong>${loggedUser.firstname} ${loggedUser.lastname}</strong><p>
-                        <p><i class="fa-solid fa-at"></i> ${loggedUser.email}</p>
-                        <p><i class="fa-solid fa-phone"></i>${loggedUser.phoneNum}</p>
-                    
-                        <div class="card-footer d-flex justify-content-between">
-                            <a href="#" class="btn btn-primary">Edit my Profile</a>
-                            <a href="${loggedUser.roles.iterator().next().baseUrl}" class="btn btn-dark">Go to my Dashboard</a>
-                        </div>
+                    <div class="card-body">    
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <form:label class="form-label" path="firstname">Firstname<span class="text-danger"> *</span></form:label>
+                                    <form:input type="text" class="form-control" path="firstname" value="${editUser.firstname}"/>
+                                    <form:errors path="firstname" class="errors"/>
+                                </div>
+                                <div class="col">
+                                    <form:label class="form-label" path="lastname">Lastname<span class="text-danger"> *</span></form:label>
+                                    <form:input type="text" class="form-control" path="lastname" value="${editUser.lastname}"/>
+                                    <form:errors path="lastname" class="errors"/>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label" for="disabled-username" >Username<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control" aria-label="Disabled input example" value="${editUser.username}" disabled id="disabled-username"/>                                
+                                    
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="disabled-pwd">Password<span class="text-danger"> *</span></label>
+                                    <input type="password" class="form-control" aria-label="Disabled input example" disabled  value="${editUser.password}" id="disabled-pwd"/>                                
+                                    
+                                </div>                            
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <form:label class="form-label" path="email">Email<span class="text-danger"> *</span></form:label>
+                                    <form:input class="form-control" path="email"/>
+                                    <form:errors path="email" class="errors"/>
+                                </div>
+                                <div class="col">
+                                    <form:label class="form-label" path="phoneNum">Phone Num</form:label>
+                                    <form:input class="form-control" path="phoneNum" />
+                                    <form:errors path="phoneNum" class="errors"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <form:hidden path="id"/>
+                                <form:hidden path="username"/>
+                                <form:hidden path="password"/>
+                                <form:hidden path="roles"/>
+                                <p><i class="fa-solid fa-calendar-days"></i> Joined on <u><fmt:formatDate type="date" value="${editUser.createdOn}"/></u></p>
+                            
+                            </div>
+                            
+                        
                     </div>
+                    
+                    <div class="card-footer d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Edit my Profile</button>
+                        <a href="/${controllerPath}" class="btn btn-dark">Go to my Dashboard</a>
+                    </div>
+                    
                 </div>
+                </form:form>
             </div>
         </div>
 
