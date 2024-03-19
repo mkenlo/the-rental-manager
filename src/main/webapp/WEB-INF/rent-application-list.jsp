@@ -41,7 +41,7 @@
                                     <tbody>
                                         <c:forEach var="item" items="${applications}">
                                             <tr>
-                                                <th scope="row"></th>
+                                                <th scope="row">${item.id}</th>
                                                 <td><a href="/owner/${loggedUser.id}/applications/${item.id}">${item.property.name}</a></td>
                                                 <td>${item.property.address}</td>
                                                 <td>${item.property.propertyType}</td>

@@ -74,7 +74,7 @@
                                     <tbody class="table-striped">
                                         <c:forEach var="item" items="${properties}">
                                             <tr>
-                                                <th scope="row"></th>
+                                                <th scope="row">${item.id}</th>
                                                 <td><a href="/properties/${item.id}">${item.name}</a></td>
                                                 <td>${item.address}</td>
                                                 <td>${item.propertyType}</td>
