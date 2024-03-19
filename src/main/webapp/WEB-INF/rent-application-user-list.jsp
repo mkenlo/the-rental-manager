@@ -65,7 +65,7 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${item.status=="approved"}">
+                                                    <c:if test="${item.status=='approved'}">
                                                         <a href="#" class="btn btn-outline-success btn-sm">Sign Lease</a>  
                                                     </c:if>
                                                 </td>

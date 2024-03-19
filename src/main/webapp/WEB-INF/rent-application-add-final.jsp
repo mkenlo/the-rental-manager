@@ -3,12 +3,6 @@
     <!-- Main start-->
     <main class="container py-4">
 
-        <div class="d-flex mb-3 justify-content-end">
-            <a href="/${controllerPath}" class="nav-link text-primary" aria-current="page">
-                    <i class="fa-solid fa-house-user fa-lg"></i>
-                    Dashboard
-            </a>
-        </div>
         <c:if test="${message}">
             <div class="row">
                 <div class="alert alert-success" role="alert">${message}</div>

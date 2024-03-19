@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import com.mkenlo.rentalmanager.models.Applicant;
 import com.mkenlo.rentalmanager.models.Landlord;
 import com.mkenlo.rentalmanager.models.LoginUser;
 import com.mkenlo.rentalmanager.models.PropertyManager;
@@ -94,12 +93,6 @@ public class UserService {
                 tenant.setProfile(user);
                 tenantRepository.save(tenant);
                 user.setTenant(tenant);
-                break;
-            case "role_applicant":
-                Applicant applicant = new Applicant();
-                applicant.setProfile(user);
-                applicantRepository.save(applicant);
-                user.setApplicant(applicant);
                 break;
             case "role_landlord":
                 Landlord landlord = new Landlord();

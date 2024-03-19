@@ -52,11 +52,11 @@ public class ApplicantController {
     public String index(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session,
             RedirectAttributes redirect) {
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+        User loggedUser = userService.findByUsername(username);
+        if (loggedUser == null) {
             redirect.addFlashAttribute("error", "action requires login");
             return "redirect:/login";
         }
-        User loggedUser = userService.findByUsername(username);
         if (!loggedUser.hasRole("role_applicant")) {
             redirect.addFlashAttribute("error", "user not authorized");
             return "redirect:/login";
@@ -71,12 +71,13 @@ public class ApplicantController {
     public String startApplicationStep1(@PathVariable("propertyId") long propertyId, Model model, HttpSession session,
             RedirectAttributes redirect) {
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+        User loggedUser = userService.findByUsername(username);
+        if (loggedUser == null) {
             redirect.addFlashAttribute("error", "action requires login");
             return "redirect:/login";
         }
-        User loggedUser = userService.findByUsername(username);
-        if (!loggedUser.getRoles().get(0).getName().equalsIgnoreCase("role_applicant")) {
+
+        if (!loggedUser.hasRole("role_applicant")) {
             redirect.addFlashAttribute("error", "user not authorized");
             return "redirect:/login";
         }
@@ -122,7 +123,7 @@ public class ApplicantController {
 
         if (property == null || applicant == null) {
             redirect.addFlashAttribute("error", "404 - Object Non Found. Invalid Payload");
-            return "redirect:/applicant";
+            return "404";
         }
         if (result.hasErrors()) {
             model.addAttribute("property", property);
@@ -141,6 +142,8 @@ public class ApplicantController {
     @GetMapping("/summary/application/{appId}")
     public String applicationSummary(@PathVariable("appId") long appId, Model model) {
         RentalApplication application = rentAppService.getById(appId);
+        if (application == null)
+            return "404";
         model.addAttribute("application", application);
         return "rent-application-add-final";
     }
@@ -149,11 +152,12 @@ public class ApplicantController {
     public String listApplications(Model model, HttpSession session,
             RedirectAttributes redirect) {
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+        User loggedUser = userService.findByUsername(username);
+        if (loggedUser == null) {
             redirect.addFlashAttribute("error", "action requires login");
             return "redirect:/login";
         }
-        User loggedUser = userService.findByUsername(username);
+
         Applicant applicant = applicantService.getByProfile(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("applications", rentAppService.getByApplicant(applicant));

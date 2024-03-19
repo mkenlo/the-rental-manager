@@ -60,11 +60,12 @@ public class OwnerController {
     public String index(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session,
             RedirectAttributes redirect) {
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+        User loggedUser = userService.findByUsername(username);
+        if (loggedUser == null) {
             redirect.addFlashAttribute("error", "action requires login");
             return "redirect:/login";
         }
-        User loggedUser = userService.findByUsername(username);
+
         if (!loggedUser.hasRole("role_landlord")) {
             redirect.addFlashAttribute("error", "user not authorized");
             return "redirect:/login";
@@ -83,15 +84,16 @@ public class OwnerController {
     @GetMapping("/properties/add")
     public String addPropertyForm(Model model, RedirectAttributes redirect, HttpSession session) {
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+        User loggedUser = userService.findByUsername(username);
+        if (loggedUser == null) {
             return "redirect:/login";
         }
-        User loggedUser = userService.findByUsername(username);
-        model.addAttribute("loggedUser", loggedUser);
-        if (loggedUser == null || !loggedUser.getRoles().contains(roleService.findByName("ROLE_LANDLORD"))) {
+
+        if (!loggedUser.hasRole("role_landlord")) {
             redirect.addFlashAttribute("error", "Action requires Login");
             return "redirect:/login";
         }
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("newProperty", new Property());
         return "property-add";
     }
@@ -111,17 +113,16 @@ public class OwnerController {
             RedirectAttributes redirect, HttpSession session) {
 
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+        User loggedUser = userService.findByUsername(username);
+        if (loggedUser == null) {
             return "redirect:/login";
         }
-        User loggedUser = userService.findByUsername(username);
-        model.addAttribute("loggedUser", loggedUser);
-
         Property property = propertyService.getById(propertyId);
         if (property == null) {
             redirect.addAttribute("error", "Property Object Non Found");
-            return "redirect:/owner";
+            return "404";
         }
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("property", property);
         return "property-edit";
     }
@@ -142,7 +143,7 @@ public class OwnerController {
         Property property = propertyService.getById(id);
         if (property == null) {
             redirect.addAttribute("error", "Property Object Non Found");
-            return "redirect:/owner";
+            return "404";
         }
         propertyService.delete(id);
 

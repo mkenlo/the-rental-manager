@@ -87,7 +87,7 @@
                     <div class="mb-3 row">
                         <form:label path="roles" class="form-label">How do you describe yourself?</form:label>
                         <c:forEach var="role" items="${roles}">
-                        <c:if test="${role.name!='ROLE_RESIDENT' && role.name!="ROLE_MANAGER"}">
+                        <c:if test="${role.name!='ROLE_RESIDENT' && role.name!='ROLE_MANAGER'}">
                         <div class="col-xs-6 col-md-8 mx-1 mb-3 card border-left-info radio-card">
                             <div class="card-body">                            
                                 <input name="roles" class="radio" type="radio" value="${role.id}"

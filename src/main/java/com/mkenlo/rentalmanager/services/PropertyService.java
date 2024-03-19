@@ -16,7 +16,7 @@ import com.mkenlo.rentalmanager.repositories.PropertyRepository;
 @Service
 public class PropertyService {
     PropertyRepository propertyRepository;
-    final int pageSize = 10;
+    final int pageSize = 8;
 
     public PropertyService(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
