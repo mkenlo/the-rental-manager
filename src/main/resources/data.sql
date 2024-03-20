@@ -1,4 +1,3 @@
-/*
 insert into role(name, display_name, description, base_url, role_type) values ("ROLE_ADMIN", "admin", "Role defined for Administrators", "/admin", "admin");
 insert into role(name, display_name, description, base_url, role_type) values ("ROLE_LANDLORD", "landlord", "Role defined for Landlords or HomeOwners", "/owner", "user");
 insert into role(name, display_name, description, base_url, role_type) values ("ROLE_MANAGER", "manager", "Role defined for Property Managers", "/manager", "user");
@@ -11,7 +10,7 @@ insert into user(email,firstname,lastname,password,username) values
 
 insert into users_roles(user_id, role_id) values (1, 1);
 
-
+/*
 insert into property (name, address, description, num_bed, num_bath, surface, owner_id,min_lease_length,min_lease_price) values ('Sparrow, rufous-collared', '769 Huxley Street', 'imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam', 4, 3, 2509, 1,6,2500);
 insert into property (name, address, description, num_bed, num_bath, surface, owner_id,min_lease_length,min_lease_price) values ('Blue peacock', '8114 Loeprich Center', 'in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus', 1, 1, 6969, 1,6,2500);
 insert into property (name, address, description, num_bed, num_bath, surface, owner_id,min_lease_length,min_lease_price) values ('Lion, galapagos sea', '50 Mayfield Park', 'volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla', 6, 3, 4646, 1,6,2500);
