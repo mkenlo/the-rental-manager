@@ -66,6 +66,7 @@
                         <form:errors path="password" class="errors"/>  
                     </div>
                     <div class="mb-3">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="submit" class="btn btn-dark" value="Submit" />
                         <span>or <a href="/register">Create an account</a></span>
                     </div>

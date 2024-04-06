@@ -36,6 +36,7 @@ public class LoginController {
     public String doLogin(Model model, @RequestParam(value = "error", required = false) String error) {
         if (error != null)
             model.addAttribute("error", "Username or Password incorrect");
+
         model.addAttribute("newLogin", new LoginUser());
         return "login";
     }
@@ -64,9 +65,8 @@ public class LoginController {
         }
         Role role = user.getRoles().get(0);
         userService.setUserProfile(role, user);
-        session.setAttribute("username", user.getUsername());
 
-        return "redirect:" + role.getBaseUrl();
+        return "redirect:/login";
     }
 
     @PostMapping("/login")
