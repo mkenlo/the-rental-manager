@@ -1,5 +1,6 @@
 package com.mkenlo.rentalmanager.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
     private UserDetailsService userDetailsService;
+
+    public WebSecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -29,7 +34,6 @@ public class WebSecurityConfig {
                 .loginPage("/login")
                 .permitAll()
                 .failureUrl("/login?error")
-                .loginProcessingUrl("/dologin")
                 .defaultSuccessUrl("/myaccount"));
         return http.build();
     }
