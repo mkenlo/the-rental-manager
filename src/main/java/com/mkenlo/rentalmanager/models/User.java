@@ -63,7 +63,7 @@ public class User {
     Date lastUpdateOn;
 
     @NotNull(message = "Please pick a role")
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     List<Role> roles;
 
@@ -245,9 +245,10 @@ public class User {
         this.createdOn = createdOn;
     }
 
-    public boolean hasRole(String roleName){
+    public boolean hasRole(String roleName) {
         for (Role role : roles) {
-            if(role.getName().equalsIgnoreCase(roleName)) return true;
+            if (role.getName().equalsIgnoreCase(roleName))
+                return true;
         }
         return false;
     }

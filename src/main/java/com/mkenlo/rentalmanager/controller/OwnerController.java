@@ -1,5 +1,6 @@
 package com.mkenlo.rentalmanager.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.RoleService;
 import com.mkenlo.rentalmanager.services.UserService;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -51,56 +51,34 @@ public class OwnerController {
     }
 
     @ModelAttribute
-    public void addAttributes(Model model) {
-        // @TODO add Spring Security and save user info in model here
+    public void addAttributes(Model model, Principal principal) {
+        String username = principal.getName();
+        model.addAttribute("loggedUser", userService.findByUsername(username));
         model.addAttribute("controllerPath", "owner");
     }
 
     @GetMapping("")
-    public String index(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session,
-            RedirectAttributes redirect) {
-        String username = (String) session.getAttribute("username");
+    public String index(@RequestParam(defaultValue = "1") int page, Model model, Principal principal) {
+        String username = principal.getName();
         User loggedUser = userService.findByUsername(username);
-        if (loggedUser == null) {
-            redirect.addFlashAttribute("error", "action requires login");
-            return "redirect:/login";
-        }
-
-        if (!loggedUser.hasRole("role_landlord")) {
-            redirect.addFlashAttribute("error", "user not authorized");
-            return "redirect:/login";
-        }
         Landlord owner = loggedUser.getLandlord();
 
         Page<Property> propertiesPaginated = propertyService.getPropertiesByOwner(owner,
                 page);
         model.addAttribute("countApplications", rentAppService.getByPropertyOwner(owner).size());
-        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("rented", occupationService.getByLandlord(owner).size());
         propertyService.addPaginationModel(page, model, propertiesPaginated);
         return "owner";
     }
 
     @GetMapping("/properties/add")
-    public String addPropertyForm(Model model, RedirectAttributes redirect, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        User loggedUser = userService.findByUsername(username);
-        if (loggedUser == null) {
-            return "redirect:/login";
-        }
-
-        if (!loggedUser.hasRole("role_landlord")) {
-            redirect.addFlashAttribute("error", "Action requires Login");
-            return "redirect:/login";
-        }
-        model.addAttribute("loggedUser", loggedUser);
+    public String addPropertyForm(Model model) {
         model.addAttribute("newProperty", new Property());
         return "property-add";
     }
 
     @PostMapping("/properties/add")
-    public String postAddProperty(@Valid @ModelAttribute("newProperty") Property property, BindingResult result,
-            Model model) {
+    public String postAddProperty(@Valid @ModelAttribute("newProperty") Property property, BindingResult result) {
         if (result.hasErrors()) {
             return "property-add";
         }
@@ -110,73 +88,57 @@ public class OwnerController {
 
     @GetMapping("/properties/{propertyId}/edit")
     public String editPropertyForm(@PathVariable("propertyId") long propertyId, Model model,
-            RedirectAttributes redirect, HttpSession session) {
-
-        String username = (String) session.getAttribute("username");
-        User loggedUser = userService.findByUsername(username);
-        if (loggedUser == null) {
-            return "redirect:/login";
-        }
+            RedirectAttributes redirect) {
         Property property = propertyService.getById(propertyId);
         if (property == null) {
             redirect.addAttribute("error", "Property Object Non Found");
             return "404";
         }
-        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("property", property);
         return "property-edit";
     }
 
     @PutMapping("/properties/{propertyId}/edit")
     public String postEditProperty(@PathVariable("propertyId") long id,
-            @Valid @ModelAttribute("property") Property property, BindingResult result, Model model) {
+            @Valid @ModelAttribute("property") Property property, BindingResult result) {
         if (result.hasErrors()) {
             return "property-edit";
         }
-
         propertyService.save(property);
         return "redirect:/owner";
     }
 
     @DeleteMapping("/properties/{propertyId}/delete")
-    public String deleteProperty(@PathVariable("propertyId") long id, Model model, RedirectAttributes redirect) {
+    public String deleteProperty(@PathVariable("propertyId") long id, RedirectAttributes redirect) {
         Property property = propertyService.getById(id);
         if (property == null) {
             redirect.addAttribute("error", "Property Object Non Found");
             return "404";
         }
         propertyService.delete(id);
-
         return "redirect:/owner";
 
     }
 
     @GetMapping("/{ownerId}/applications")
-    public String getRentApplications(@PathVariable("ownerId") long id, Model model, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-
-        User loggedUser = userService.findById(id);
-
-        if (username == null || loggedUser == null) {
+    public String getRentApplications(@PathVariable("ownerId") long ownerId, Model model, Principal principal) {
+        String username = principal.getName();
+        User loggedUser = userService.findById(ownerId);
+        if (loggedUser == null || !loggedUser.getUsername().equalsIgnoreCase(username)) {
             return "redirect:/login";
         }
-
         Landlord owner = loggedUser.getLandlord();
         List<RentalApplication> applications = rentAppService.getByPropertyOwner(owner);
         model.addAttribute("applications", applications);
-        model.addAttribute("loggedUser", loggedUser);
         return "rent-application-list";
     }
 
     @GetMapping("/{ownerId}/applications/{applicationId}")
     public String getRentApplicationsDetail(@PathVariable("ownerId") long ownerId,
-            @PathVariable("applicationId") long applicationId, Model model, HttpSession session) {
-
-        String username = (String) session.getAttribute("username");
-
+            @PathVariable("applicationId") long applicationId, Model model, Principal principal) {
+        String username = principal.getName();
         User loggedUser = userService.findById(ownerId);
-
-        if (username == null || loggedUser == null) {
+        if (loggedUser == null || !loggedUser.getUsername().equalsIgnoreCase(username)) {
             return "redirect:/login";
         }
         RentalApplication application = rentAppService.getById(applicationId);
@@ -184,23 +146,18 @@ public class OwnerController {
             return "404";
         }
         model.addAttribute("application", application);
-        model.addAttribute("loggedUser", loggedUser);
         return "rent-application-detail";
     }
 
     @GetMapping("/{ownerId}/applications/{applicationId}/edit")
     public String changeStatusRentApplication(@PathVariable("ownerId") long ownerId,
             @PathVariable("applicationId") long applicationId, @RequestParam("status") boolean status, Model model,
-            HttpSession session) {
-
-        String username = (String) session.getAttribute("username");
-
+            Principal principal) {
+        String username = principal.getName();
         User loggedUser = userService.findById(ownerId);
-
-        if (username == null || loggedUser == null) {
+        if (loggedUser == null || !loggedUser.getUsername().equalsIgnoreCase(username)) {
             return "redirect:/login";
         }
-
         RentalApplication application = rentAppService.getById(applicationId);
         if (application == null) {
             return "404";
@@ -211,7 +168,6 @@ public class OwnerController {
             application.setStatus("rejected");
         rentAppService.save(application);
         model.addAttribute("application", application);
-        model.addAttribute("loggedUser", loggedUser);
         return String.format("redirect:/owner/%s/applications/%s", ownerId, applicationId);
     }
 

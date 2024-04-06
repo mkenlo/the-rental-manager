@@ -1,6 +1,7 @@
 package com.mkenlo.rentalmanager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.web.exchanges.HttpExchange.Principal;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,6 @@ import com.mkenlo.rentalmanager.services.PropertyOccupationService;
 import com.mkenlo.rentalmanager.services.PropertyService;
 import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.UserService;
-
-import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,28 +38,21 @@ public class ManagerController {
     }
 
     @ModelAttribute
-    public void addAttributes(Model model) {
-        // @TODO add Spring Security and save user info in model here
-        model.addAttribute("controllerPath", "manager");
+    public void addAttributes(Model model, Principal principal) {
+        String username = principal.getName();
+        User loggedUser = userService.findByUsername(username);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("controllerPath", loggedUser.getRoles().get(0).getBaseUrl());
     }
 
     @GetMapping("")
-    public String index(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session,
+    public String index(@RequestParam(defaultValue = "1") int page, Model model, Principal principal,
             RedirectAttributes redirect) {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            redirect.addFlashAttribute("error", "action requires login");
-            return "redirect:/login";
-        }
+        String username = principal.getName();
         User loggedUser = userService.findByUsername(username);
-        if (!loggedUser.hasRole("role_manager")) {
-            redirect.addFlashAttribute("error", "user not authorized");
-            return "redirect:/login";
-        }
 
         Page<Property> propertiesPaginated = propertyService.getPropertiesByPropertyManager(loggedUser.getManager(),
                 page);
-        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("countApplications", rentAppService.getByPropertyManager(loggedUser.getManager()).size());
         model.addAttribute("rented", occupationService.getByManager(loggedUser.getManager()).size());
         propertyService.addPaginationModel(page, model, propertiesPaginated);

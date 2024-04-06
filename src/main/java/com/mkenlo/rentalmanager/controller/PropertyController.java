@@ -16,7 +16,6 @@ import com.mkenlo.rentalmanager.services.PropertyService;
 import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.UserService;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,25 +28,19 @@ public class PropertyController {
     PropertyService propertyService;
     RentApplicationService rentAppService;
 
-    public PropertyController(UserService userService, PropertyService propertyService, RentApplicationService rentAppService) {
+    public PropertyController(UserService userService, PropertyService propertyService,
+            RentApplicationService rentAppService) {
         this.userService = userService;
         this.propertyService = propertyService;
         this.rentAppService = rentAppService;
     }
 
     @ModelAttribute
-    public void addAttributes(Model model, Principal principal, HttpSession session) {
-        User user;
-        String username;
-        if (principal != null) {
-            username = principal.getName();
-        } else if (session.getAttribute("username") != null) {
-            username = (String) session.getAttribute("username");
-        } else {
-            username = "norole";
-        }
-        user = userService.findByUsername(username);
-        model.addAttribute("loggedUser", user);
+    public void addAttributes(Model model, Principal principal) {
+        String username = principal.getName();
+        User loggedUser = userService.findByUsername(username);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("controllerPath", loggedUser.getRoles().get(0).getBaseUrl());
     }
 
     @GetMapping("")
@@ -71,20 +64,12 @@ public class PropertyController {
     }
 
     @GetMapping("/applications/{applicationId}")
-    public String getApplicationDetail(@PathVariable("applicationId") long applicationId,Model model, HttpSession session) {
-
-        String username = (String) session.getAttribute("username");
-
-        if (username == null) {
-            return "redirect:/login";
-        }
-        User loggedUser = userService.findByUsername(username);
+    public String getApplicationDetail(@PathVariable("applicationId") long applicationId, Model model) {
         RentalApplication application = rentAppService.getById(applicationId);
         if (application == null) {
             return "404";
         }
         model.addAttribute("application", application);
-        model.addAttribute("loggedUser", loggedUser);
         return "rent-application-detail";
     }
 

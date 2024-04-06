@@ -1,5 +1,7 @@
 package com.mkenlo.rentalmanager.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,6 @@ import com.mkenlo.rentalmanager.services.PropertyService;
 import com.mkenlo.rentalmanager.services.RentApplicationService;
 import com.mkenlo.rentalmanager.services.UserService;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,50 +44,31 @@ public class ApplicantController {
     RentApplicationService rentAppService;
 
     @ModelAttribute
-    public void addAttributes(Model model) {
-        // @TODO add Spring Security and save user info in model here
-        model.addAttribute("controllerPath", "applicant");
+    public void addAttributes(Model model, Principal principal) {
+        String username = principal.getName();
+        User loggedUser = userService.findByUsername(username);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("controllerPath", loggedUser.getRoles().get(0).getBaseUrl());
     }
 
     @GetMapping("")
-    public String index(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session,
+    public String index(@RequestParam(defaultValue = "1") int page, Model model,
             RedirectAttributes redirect) {
-        String username = (String) session.getAttribute("username");
-        User loggedUser = userService.findByUsername(username);
-        if (loggedUser == null) {
-            redirect.addFlashAttribute("error", "action requires login");
-            return "redirect:/login";
-        }
-        if (!loggedUser.hasRole("role_applicant")) {
-            redirect.addFlashAttribute("error", "user not authorized");
-            return "redirect:/login";
-        }
         Page<Property> propertiesPaginated = propertyService.getAll(page);
         propertyService.addPaginationModel(page, model, propertiesPaginated);
-        model.addAttribute("loggedUser", loggedUser);
         return "applicant";
     }
 
     @GetMapping("/start/application/{propertyId}")
-    public String startApplicationStep1(@PathVariable("propertyId") long propertyId, Model model, HttpSession session,
+    public String startApplicationStep1(@PathVariable("propertyId") long propertyId, Model model, Principal principal,
             RedirectAttributes redirect) {
-        String username = (String) session.getAttribute("username");
+        String username = principal.getName();
         User loggedUser = userService.findByUsername(username);
-        if (loggedUser == null) {
-            redirect.addFlashAttribute("error", "action requires login");
-            return "redirect:/login";
-        }
-
-        if (!loggedUser.hasRole("role_applicant")) {
-            redirect.addFlashAttribute("error", "user not authorized");
-            return "redirect:/login";
-        }
         Applicant applicant = applicantService.getByProfile(loggedUser);
         model.addAttribute("newApplicant", applicant);
         if (applicant == null) {
             model.addAttribute("newApplicant", new Applicant());
         }
-        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("property", propertyService.getById(propertyId));
         model.addAttribute("step", 1);
         return "rent-application-add";
@@ -149,9 +131,9 @@ public class ApplicantController {
     }
 
     @GetMapping("/my-applications")
-    public String listApplications(Model model, HttpSession session,
+    public String listApplications(Model model, Principal principal,
             RedirectAttributes redirect) {
-        String username = (String) session.getAttribute("username");
+        String username = principal.getName();
         User loggedUser = userService.findByUsername(username);
         if (loggedUser == null) {
             redirect.addFlashAttribute("error", "action requires login");

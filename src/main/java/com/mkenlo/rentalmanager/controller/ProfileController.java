@@ -1,5 +1,7 @@
 package com.mkenlo.rentalmanager.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,32 +30,20 @@ public class ProfileController {
     }
 
     @ModelAttribute
-    public void addAttributes(Model model) {
-        model.addAttribute("controllerPath", "applicant");
+    public void addAttributes(Model model, Principal principal) {
+        String username = principal.getName();
+        User loggedUser = userService.findByUsername(username);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("controllerPath", loggedUser.getRoles().get(0).getBaseUrl());
     }
 
     @GetMapping("")
     public String index(Model model, HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            return "redirect:/login";
-        }
-        User loggedUser = userService.findByUsername(username);
-        model.addAttribute("loggedUser", loggedUser);
-        model.addAttribute("editUser", loggedUser);
-
         return "my-dashboard";
     }
 
     @PutMapping("/edit")
-    public String editProfile(@Valid @ModelAttribute("editUser") User editUser, BindingResult result, Model model,
-            HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            return "redirect:/login";
-        }
-        User loggedUser = userService.findByUsername(username);
-        model.addAttribute("loggedUser", loggedUser);
+    public String editProfile(@Valid @ModelAttribute("loggedUser") User editUser, BindingResult result) {
 
         if (result.hasErrors()) {
             return "my-dashboard";

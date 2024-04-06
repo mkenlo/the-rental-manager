@@ -4,7 +4,7 @@
         <div class="row my-3">
             <h1 class="mt-4">Account Details</h1>
             <div class="col-xl-12">
-                <form:form action="/myaccount/edit" modelAttribute="editUser" method="put">
+                <form:form action="/myaccount/edit" modelAttribute="loggedUser" method="put">
                 <div class="card">
                     <div class="card-body">    
                             <div class="mb-3 row">
