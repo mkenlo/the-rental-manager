@@ -4,7 +4,7 @@
         <ul class="pagination justify-content-center">
             <c:if test="${currentPage>1}">
                 <li class="page-item">
-                    <a class="page-link" href="/${controllerPath}?page=${currentPage - 1}" tabindex="-1">Previous</a>
+                    <a class="page-link" href="${controllerPath}?page=${currentPage - 1}" tabindex="-1">Previous</a>
                 </li>
             </c:if>
             
@@ -12,7 +12,7 @@
 
             <c:if test="${currentPage<totalPages}">
                 <li class="page-item">
-                    <a class="page-link" href="/${controllerPath}?page=${currentPage + 1}">Next</a>
+                    <a class="page-link" href="${controllerPath}?page=${currentPage + 1}">Next</a>
                 </li>
             </c:if>
         </ul>

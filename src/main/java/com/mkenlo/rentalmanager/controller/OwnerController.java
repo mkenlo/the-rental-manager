@@ -53,8 +53,9 @@ public class OwnerController {
     @ModelAttribute
     public void addAttributes(Model model, Principal principal) {
         String username = principal.getName();
-        model.addAttribute("loggedUser", userService.findByUsername(username));
-        model.addAttribute("controllerPath", "owner");
+        User loggedUser = userService.findByUsername(username);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("controllerPath", loggedUser.getRoles().get(0).getBaseUrl());
     }
 
     @GetMapping("")

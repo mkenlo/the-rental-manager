@@ -57,7 +57,7 @@
                     
                     <div class="card-footer d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">Edit my Profile</button>
-                        <a href="/${controllerPath}" class="btn btn-dark">Go to my Dashboard</a>
+                        <a href="${controllerPath}" class="btn btn-dark">Go to my Dashboard</a>
                     </div>
                     
                 </div>

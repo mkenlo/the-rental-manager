@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarButtonsExample">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/${controllerPath}">Dashboard</a>
+                            <a class="nav-link" aria-current="page" href="${controllerPath}">Dashboard</a>
                         </li>
                     </ul>
                     <div class="d-flex align-items-center ms-auto border-start">
