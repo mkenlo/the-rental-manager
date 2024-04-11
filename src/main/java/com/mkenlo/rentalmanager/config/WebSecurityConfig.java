@@ -28,12 +28,20 @@ public class WebSecurityConfig {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/owner/**").hasAuthority("ROLE_LANDLORD")
+                        .requestMatchers("/applicant/**").hasAuthority("ROLE_APPLICANT")
                         .anyRequest().permitAll());
         http.formLogin((form) -> form
                 .loginPage("/login")
                 .permitAll()
                 .failureUrl("/login?error")
                 .defaultSuccessUrl("/myaccount"));
+        http.logout(logout -> logout
+                .permitAll()
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/"));
+
         return http.build();
     }
 
