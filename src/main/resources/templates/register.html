@@ -102,7 +102,7 @@
                         <label for="roles" class="form-label">How do you describe yourself?</label>
                         <div class="col-xs-6 col-md-8 mx-1 mb-3 card border-left-info radio-card"
                             th:each="role : ${roles}">
-                            <div class="card-body">
+                            <div class="card-body" th:if="${role.name != 'ROLE_RESIDENT'}">
                                 <input name="roles" class="radio" type="radio" th:value="${role.id}"
                                     th:checked="${role.name=='ROLE_LANDLORD'}"
                                     th:text="' I am a '+ ${#strings.capitalize(role.displayName)}" />
