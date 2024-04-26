@@ -1,4 +1,4 @@
-package com.mkenlo.rentalmanager.controller;
+package com.mkenlo.rentalmanager.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.web.exchanges.HttpExchange.Principal;

@@ -1,0 +1,98 @@
+<section th:fragment="new-application-form">
+    <div class="row">
+        <div class="col-8">
+            <h3 class="my-3">Property Details</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="|Name: ${property.name}|"></li>
+                <li class="list-group-item" th:text="|Address: ${property.address}|"></li>
+                <li class="list-group-item">Rent Price:
+                    <span class="badge text-bg-info" th:text="${property.minLeasePrice}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <h3 class="my-3">Applicant Details</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="|Name: ${applicant.firstname} ${applicant.lastname}|"></li>
+                <li class="list-group-item" th:text="|Current Address: ${applicant.currentAddress}|"></li>
+                <li class="list-group-item">Annual Salary:
+                    <span th:text="${applicant.annualSalary}"></span>
+                </li>
+                <li class="list-group-item" th:text="|Employer Name: ${applicant.employerName}|"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+
+        <h3 class="my-5">Aditional Information</h3>
+        <form th:action="@{|/applications/add/property/${propertyId}/step2?applicant=${applicant.id}|}"
+            th:object="${newApplication}" method="post">
+
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+            </div>
+
+
+            <div class="mb-3 row">
+                <div class="col-3">
+                    <label for="deposit">Deposit <span class="text-danger"> *</span></label>
+                    <input type="number" th:field="*{deposit}" class="form-control" />
+                    <p th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}" th:class="errors">
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <div class="col">
+                    <label class="form-label" for="potentialMoveInDate">Potential Move-In Date<span class="text-danger">
+                            *</span></label>
+                    <input type="date" th:field="*{potentialMoveInDate}" class="form-control" />
+                    <p th:if="${#fields.hasErrors('potentialMoveInDate')}" th:errors="*{potentialMoveInDate}"
+                        th:class="errors">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="leaseLength">Lease Length<span class="text-danger"> *</span>
+                    </label>
+
+                    <th:block th:each="months, idx: ${ {3,6,12,18,24} }">
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" th:field="*{leaseLength}"
+                                id="inlineRadio-${idx}" th:value="${months}" />
+                            <label class="form-check-label" for="inlineRadio-${idx}" th:field="*{leaseLength}"
+                                th:text="${months}">
+                            </label>
+                        </div>
+                    </th:block>
+
+                    <p th:if="${#fields.hasErrors('leaseLength')}" th:errors="*{leaseLength}" th:class="errors">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label" for="personalReferences">Have any references?</label>
+                    <div class="form-text">Name, Phone Num (each reference on a new line)</div>
+                    <textarea th:field="*{personalReferences}" class="form-control" placeholder="Name, Phone Num" />
+                    <p th:if="${#fields.hasErrors('personalReferences')}" th:errors="*{personalReferences}"
+                        th:class="errors">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="housingHistory">Housing History</label>
+                    <div class="form-text">Address, LandLord Name, Landlord Phone Num (each entry on a new line)</div>
+                    <textarea th:field="*{housingHistory}" class="form-control"
+                        placeholder="Address, LandLord Name, Landlord Phone Num" />
+                    <p th:if="${#fields.hasErrors('housingHistory')}" th:errors="*{housingHistory}" th:class="errors">
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+                <input type="hidden" name="rentPrice" th:value="${property.minLeasePrice}" />
+                <a th:href="@{|/applications/add/property/${property.id}|}" class="btn btn-secondary"> Previous </a>
+                <input type="submit" class="btn btn-dark" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+</section>

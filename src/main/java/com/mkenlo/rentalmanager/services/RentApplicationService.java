@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mkenlo.rentalmanager.models.Applicant;
 import com.mkenlo.rentalmanager.models.Landlord;
+import com.mkenlo.rentalmanager.models.Property;
 import com.mkenlo.rentalmanager.models.PropertyManager;
 import com.mkenlo.rentalmanager.models.RentalApplication;
 import com.mkenlo.rentalmanager.repositories.RentApplicationRepository;
@@ -39,5 +40,13 @@ public class RentApplicationService {
 
     public List<RentalApplication> getByPropertyManager(PropertyManager manager) {
         return rentAppRepository.findByManager(manager);
+    }
+
+    public RentalApplication getByApplicantAndProperty(Applicant applicant, Property property) {
+        return rentAppRepository.findByApplicantAndProperty(applicant, property);
+    }
+
+    public List<RentalApplication> getByProperty(Property property) {
+        return rentAppRepository.findByProperty(property);
     }
 }

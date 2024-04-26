@@ -1,4 +1,4 @@
-package com.mkenlo.rentalmanager.controller;
+package com.mkenlo.rentalmanager.controllers;
 
 import java.security.Principal;
 

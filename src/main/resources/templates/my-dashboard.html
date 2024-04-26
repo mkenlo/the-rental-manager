@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Your rental Manager</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d20aaabaac.js" crossorigin="anonymous"></script>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header th:replace="~{components/header :: header}"></header>
+    <main class="container py-4">
+
+        <div class="row my-3">
+            <h1 class="mt-4">Account Details</h1>
+            <div class="col-xl-12">
+                <form th:action="@{/myaccount/edit}" th:object="${loggedUser}" th:method="put">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <label class="form-label" for="firstname">
+                                        Firstname<span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" th:field="*{firstname}" />
+                                    <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"
+                                        th:class="errors">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="lastname">
+                                        Lastname <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" th:field="*{lastname}" />
+                                    <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
+                                        th:class="errors">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="form-label" for="disabled-username">
+                                        Username <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" aria-label="Disabled input example"
+                                        th:field="*{username}" disabled id="disabled-username" />
+
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="disabled-pwd">
+                                        Password <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="password" class="form-control" aria-label="Disabled input example"
+                                        disabled th:field="*{password}" id="disabled-pwd" />
+
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <label class="form-label" for="email">
+                                        Email<span class="text-danger"> *</span>
+                                    </label>
+                                    <input class="form-control" th:field="*{email}" />
+                                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="errors">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label" for="phoneNum">Phone Num</label>
+                                    <input class="form-control" th:field="*{phoneNum}" />
+                                    <p th:if="${#fields.hasErrors('phoneNum')}" th:errors="*{phoneNum}"
+                                        th:class="errors">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input type="hidden" th:field="*{id}" />
+                                <input type="hidden" th:field="*{username}" />
+                                <input type="hidden" th:field="*{password}" />
+                                <input type="hidden" th:field="*{roles}" />
+                                <p>
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    Joined on
+                                    <strong th:text="${#dates.format(loggedUser.createdOn,'MMM d, YYYY')}"></strong>
+                                </p>
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Edit my Profile</button>
+                            <a th:href="@{''+${controllerPath}}" class="btn btn-dark">Go to my Dashboard</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

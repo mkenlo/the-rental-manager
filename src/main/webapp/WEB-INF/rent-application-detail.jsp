@@ -49,6 +49,7 @@
         
 
     </div>
+    
     <c:if test="${application.property.owner.profile.id == loggedUser.id}">
         <div class="row my-3">
             <div class="d-flex">

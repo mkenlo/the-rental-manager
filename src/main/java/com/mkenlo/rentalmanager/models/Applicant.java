@@ -181,4 +181,10 @@ public class Applicant {
         this.rentApplications = rentApplications;
     }
 
+    @Override
+    public String toString() {
+        return "Applicant [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", dob=" + dob + ", ssn="
+                + ssn + "]";
+    }
+
 }
