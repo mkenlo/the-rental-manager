@@ -1,19 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
+
 body{
     color: #2d2f3c;
+    font-family: "Bitter", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 h1,h2,h3,h4{
-    color:#ad0fd4;
-;
+    color:#CB4335;
 }
+
 a {
     text-decoration: none;
-    color: #ad0fd4;
+    color: #CB4335;
 }
 
 a:hover {
-    color: #bc11e7;
+    color: CB4335;
 }
+
 .errors {
     font-size: .875em;
     margin-top: 0.25em;
@@ -22,35 +28,49 @@ a:hover {
 }
 
 .border-left-info {
-    border-left: .25rem solid #ad0fd4 !important;
+    border-left: .25rem solid #CB4335 !important;
 }
 
 .radio-card:hover {
-    border: 2px solid #ad0fd4;
+    border: 2px solid #CB4335;
     cursor: pointer;
 }
 
 .listing:hover{
-    border: 1px solid #592366;
+    border: 1px solid #CB4335;
 }
 
 .step-tabs.active {    
-    color: #ad0fd4;
-;
+    color: #CB4335;
     font-weight: 800;
-    border-bottom: 2px solid#ad0fd4;
-;
+    border-bottom: 2px solid#CB4335;
 }
 
 .step-tabs.disabled {
     color: #aeafb3;
 }
+
 .card-summary:hover{
-    border: 2px solid#ad0fd4;
-    background-color: #f2e7f5;
-    color:#592366;
+    border: 2px solid#CB4335;
+    background-color: #FADBD8;
+    color:#CB4335;
 }
 
-.bg-purple-subtle{
-    background-color: #f2e7f5;
+.bg-primary-subtle{
+    background-color: #FADBD8;
+}
+
+.text-bg-pending {
+    color: #000 !important;
+    background-color: #FFC300;
+}
+
+.text-bg-rejected {
+    color: #000 !important;
+    background-color: #C70039;
+}
+
+.text-bg-approved {
+    color: #000 !important;
+    background-color: #0C9018;
 }

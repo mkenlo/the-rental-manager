@@ -1,0 +1,84 @@
+<form th:action="@{|/applications/add/property/${propertyId}/step1|}" th:object="${newApplicant}" method="post"
+    th:fragment="new-applicant-form">
+    <h4>About you</h4>
+    <div class="mb-3 row">
+        <div class="col">
+            <label class="form-label" for="firstname">Firstname<span class="text-danger"> *</span>
+            </label>
+            <input type="text" class="form-control" name="firstname" th:value="${loggedUser.firstname}"
+                id="firstname" />
+            <p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" th:class="errors">
+        </div>
+        <div class="col">
+            <label class="form-label" for="lastname">Lastname<span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" name="lastname" th:value="${loggedUser.lastname}" id="lastname" />
+            <p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" th:class="errors">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col">
+            <label class="form-label" for="dob">Date of Birth<span class="text-danger"> *</span></label>
+            <input type="date" th:field="*{dob}" class="form-control" />
+            <p th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" th:class="errors">
+        </div>
+        <div class="col">
+            <label class="form-label" for="ssn">SSN<span class="text-danger"> *</span></label>
+            <input type="password" placeholder="999999999" th:field="*{ssn}" class="form-control" />
+            <p th:if="${#fields.hasErrors('ssn')}" th:errors="*{ssn}" th:class="errors">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col">
+            <label class="form-label" for="currentAddress">Current Address<span class="text-danger"> *</span>
+            </label>
+            <input type="text" th:field="*{currentAddress}" class="form-control" />
+            <p th:if="${#fields.hasErrors('currentAddress')}" th:errors="*{currentAddress}" th:class="errors">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label" for="vehiculeInfos">Please enter vehicule information if you have
+                one/multiple? </label>
+            <textarea th:field="*{vehiculeInfos}" class="form-control" placeholder="Make, Model, Year, Color" />
+            <p class="form-text">Hint: Make, Model, Year, Color</p>
+            <p th:if="${#fields.hasErrors('vehiculeInfos')}" th:errors="*{vehiculeInfos}" th:class="errors">
+        </div>
+
+    </div>
+    <h4>About your Job</h4>
+    <div class="mb-3 row">
+        <div class="col">
+            <label class="form-label" for="occupation">Occupation</label>
+            <input th:field="*{occupation}" class="form-control" />
+            <p th:if="${#fields.hasErrors('occupation')}" th:errors="*{occupation}" th:class="errors">
+        </div>
+        <div class="col">
+            <label class="form-label" for="annualSalary">Annual Salary</label>
+            <input type="number" th:field="*{annualSalary}" class="form-control" />
+            <p th:if="${#fields.hasErrors('annualSalary')}" th:errors="*{annualSalary}" th:class="errors">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label" for="employerName">Employer Name</label>
+            <input th:field="*{employerName}" class="form-control" />
+            <p th:if="${#fields.hasErrors('employerName')}" th:errors="*{employerName}" th:class="errors">
+        </div>
+        <div class="col">
+            <label class="form-label" for="employerAddress">Employer Address</label>
+            <input th:field="*{employerAddress}" class="form-control" />
+            <p th:if="${#fields.hasErrors('employerAddress')}" th:errors="*{employerAddress}" th:class="errors">
+        </div>
+        <div class="col">
+            <label class="form-label" for="employerPhoneNum">Employer Phone Num</label>
+            <input th:field="*{employerPhoneNum}" class="form-control" />
+            <p th:if="${#fields.hasErrors('employerPhoneNum')}" th:errors="*{employerPhoneNum}" th:class="errors">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" name="profile" th:value="${loggedUser.id}" />
+        <input type="submit" class="btn btn-dark" value="Save and Continue" />
+    </div>
+</form>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Your rental Manager</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d20aaabaac.js" crossorigin="anonymous"></script>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header th:replace="~{components/header :: header}"></header>
+
+    <main class="container py-4">
+
+        <div class="row" th:if="${message!=null}">
+            <div class="alert alert-primary alert-dismissible fade show col-md-4" role="alert">
+                <p th:text="${message}"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </div>
+        </div>
+
+        <div class="row my-3 properties-list">
+            <div class="col-xl-12 grid-margin stretch-card">
+                <div class="card mb-3">
+                    <div class="card-header d-flex justify-content-between">
+                        <h4 class="card-title text-purple">Rent Applications on property <span
+                                th:text="${property.name}"></span> </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> Reference # </th>
+                                        <th scope="col"> Applicant Name</th>
+                                        <th scope="col"> Submitted on</th>
+                                        <th scope="col"> Move In Date</th>
+                                        <th scope="col"> Lease Length(months)</th>
+                                        <th scope="col"> Status</th>
+                                        <th scope="col" th:if="${controllerPath}!='/applicant'"> Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr th:each="item:${applications}">
+                                        <td><a th:href="@{|/applications/${item.id}|}" th:text="'Ref#'+${item.id}"></a>
+                                        </td>
+                                        <td th:text="${item.applicant.firstname}+' '+${item.applicant.lastname}"></td>
+                                        <td th:text="${#dates.format(item.createdOn, 'MMM dd, yyyy HH:mm:ss')}">
+                                        </td>
+                                        <td th:text="${#dates.format(item.potentialMoveInDate, 'MMM dd, yyyy')}"></td>
+                                        <td th:text="${item.leaseLength}"></td>
+                                        <td>
+                                            <span class="badge" th:classappend="'text-bg-'+${item.status}"
+                                                th:text="${item.status}"></span>
+                                        </td>
+                                        <td th:if="${controllerPath}!='/applicant'">
+                                            <th:block th:if="${item.status == 'approved'}">
+                                                <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=0"
+                                                    class="btn btn-outline-danger btn-sm">Reject</a>
+                                            </th:block>
+
+                                            <th:block th:if="${item.status == 'rejected'}">
+                                                <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=1"
+                                                    class="btn btn-outline-success btn-sm">Approve</a>
+
+                                            </th:block>
+
+                                            <th:block th:if="${item.status}=='pending'">
+                                                <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=1"
+                                                    class="btn btn-outline-success btn-sm">Approve</a>
+                                                <a href="/owner/${loggedUser.id}/applications/${item.id}/edit?status=0"
+                                                    class="btn btn-outline-danger btn-sm">Reject</a>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end of card-->
+
+                <div id="page-navigation" th:insert="~{components/pagination :: pagination}">...</div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Main end-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,7 +1,5 @@
 package com.mkenlo.rentalmanager.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +22,6 @@ public class LoginController {
 
     RoleService roleService;
     UserService userService;
-
-    Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     public LoginController(RoleService roleService, UserService userService) {
         this.roleService = roleService;

@@ -30,4 +30,6 @@ public interface RentApplicationRepository extends CrudRepository<RentalApplicat
 
     @Query("SELECT app FROM RentalApplication app JOIN Property prop ON app.property.id=prop.id where prop.propertyManager =?1")
     List<RentalApplication> findByManager(PropertyManager manager);
+
+    RentalApplication findByApplicantAndProperty(Applicant applicant, Property property);
 }

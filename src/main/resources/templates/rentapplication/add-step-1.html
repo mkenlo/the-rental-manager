@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Your rental Manager</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d20aaabaac.js" crossorigin="anonymous"></script>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header th:replace="~{components/header :: header}"></header>
+
+    <main class="container py-4">
+        <h3>New Rental Application</h3>
+
+        <div class="row mb-4 mt-4 border-bottom">
+            <div class="col step-tabs p-2 active bg-primary-subtle rounded-top">
+                <p><i class="fa-solid fa-id-card"></i> Applicant</p>
+            </div>
+            <div class="col step-tabs p-2 disabled">
+                <p><i class="fa-solid fa-file-contract"></i> Lease Infos</p>
+            </div>
+            <div class="col step-tabs p-2 disabled">
+                <p><i class="fa-solid fa-rectangle-list"></i> Summary </p>
+            </div>
+        </div>
+        <div class="row" th:insert="~{rentapplication/components/new-applicant-form :: new-applicant-form}"></div>
+
+
+
+
+    </main>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
