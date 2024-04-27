@@ -30,6 +30,9 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/owner/**").hasAuthority("ROLE_LANDLORD")
                         .requestMatchers("/applicant/**").hasAuthority("ROLE_APPLICANT")
+                        .requestMatchers("/properties/add").hasAnyAuthority("ROLE_LANDLORD", "ROLE_MANAGER")
+                        .requestMatchers("/properties/*/edit").hasAnyAuthority("ROLE_LANDLORD", "ROLE_MANAGER")
+                        .requestMatchers("/applications/*/edit").hasAnyAuthority("ROLE_LANDLORD", "ROLE_MANAGER")
                         .anyRequest().permitAll());
         http.formLogin((form) -> form
                 .loginPage("/login")
