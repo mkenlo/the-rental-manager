@@ -44,6 +44,8 @@ public class WebSecurityConfig {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/"));
+        http.sessionManagement(session -> session.invalidSessionUrl("/login?expired").maximumSessions(1)
+        .expiredUrl("/login?expired"));
 
         return http.build();
     }
