@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overlock:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
 
 body{
     color: #2d2f3c;
-    font-family: "Bitter", serif;
+    font-family: "Overlock", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
